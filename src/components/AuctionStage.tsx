@@ -82,7 +82,6 @@ export function AuctionStage({
   const tickRef = useRef<HTMLAudioElement | null>(null);
   // SOLD AUDIO REFS — Conditional routing
   const soldDefaultRef = useRef<HTMLAudioElement | null>(null);
-  const soldHackerRef = useRef<HTMLAudioElement | null>(null);    // ≥15 crores
   const sold7CroreRef = useRef<HTMLAudioElement | null>(null);    // EXACTLY 7 crores
   const startupKBCRef = useRef<HTMLAudioElement | null>(null);    // Startup (once)
 
@@ -102,10 +101,6 @@ export function AuctionStage({
     const soldDefault = new Audio('/kaun_banega_crorepati.mp3');
     soldDefault.volume = 0.8;
     soldDefaultRef.current = soldDefault;
-
-    const soldHacker = new Audio('/hacker_hai_bhai_hacker_hain.mp3');
-    soldHacker.volume = 0.9;
-    soldHackerRef.current = soldHacker;
 
     const sold7Crore = new Audio('/7_crore.mp3');
     sold7Crore.volume = 0.9;
@@ -187,25 +182,16 @@ export function AuctionStage({
     setShowSoldOverlay(true);
 
     // ━━━ SOLD AUDIO ROUTING ━━━
-    // Deterministic selection: EXACTLY one sound per sale
     const playSOLDSound = (price: number) => {
-      // Priority 1: EXACTLY 7 crores
+      // Special Sound: EXACTLY 7 crores
       if (price === 7) {
         if (sold7CroreRef.current) {
           sold7CroreRef.current.currentTime = 0;
           sold7CroreRef.current.play().catch(e => console.log('7 Crore sound failed:', e));
         }
-        return;
       }
-      // Priority 2: ≥15 crores
-      if (price >= 15) {
-        if (soldHackerRef.current) {
-          soldHackerRef.current.currentTime = 0;
-          soldHackerRef.current.play().catch(e => console.log('Hacker sound failed:', e));
-        }
-        return;
-      }
-      // Default: All other sales
+
+      // Default Sold Sound (KBC Theme) plays for ALL sales
       if (soldDefaultRef.current) {
         soldDefaultRef.current.currentTime = 0;
         soldDefaultRef.current.play().catch(e => console.log('Default sold sound failed:', e));
