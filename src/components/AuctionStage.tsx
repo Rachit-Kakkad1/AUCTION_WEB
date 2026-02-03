@@ -548,7 +548,7 @@ export function AuctionStage({
                 </div>
               </div>
 
-              <div className="flex gap-3">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <div className="glass-card rounded-lg px-4 py-3 flex-1">
                   <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Base Price</p>
                   <p className="text-xl font-bold text-primary number-display">{BASE_PRICE} cr</p>
@@ -673,7 +673,7 @@ export function AuctionStage({
                 </div>
               )}
 
-              <div className="flex gap-3">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <Button
                   onClick={handleConfirmSale}
                   disabled={!selectedVanguard || (selectedTeam && bidAmount > (selectedTeam.budget - selectedTeam.spent))}

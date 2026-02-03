@@ -19,7 +19,7 @@ import { Student, Vanguard } from '@/types/auction';
 // ============================================================
 // STORAGE KEY - Version for future migrations
 // ============================================================
-const STORAGE_KEY = 'auction_state_v3';
+const STORAGE_KEY = 'auction_state_v7';
 const CHANNEL_NAME = 'auction_sync';
 
 // ============================================================
@@ -218,10 +218,10 @@ const RAW_STUDENTS: Omit<Student, 'status' | 'soldTo' | 'soldPrice'>[] = [
 ];
 
 const INITIAL_VANGUARDS: Vanguard[] = [
-    { id: 'v1', name: 'Terra', color: 'emerald', budget: 100, spent: 0, squad: [] },
-    { id: 'v2', name: 'Aqua', color: 'blue', budget: 100, spent: 0, squad: [] },
-    { id: 'v3', name: 'Aero', color: 'amber', budget: 100, spent: 0, squad: [] },
-    { id: 'v4', name: 'Ignis', color: 'rose', budget: 100, spent: 0, squad: [] },
+    { id: 'v1', name: 'Terra', color: 'emerald', budget: 100, spent: 0, squad: [], leader: 'Pal Pathak' },
+    { id: 'v2', name: 'Aqua', color: 'blue', budget: 100, spent: 0, squad: [], leader: 'Jonty Patel' },
+    { id: 'v3', name: 'Aero', color: 'amber', budget: 100, spent: 0, squad: [], leader: 'Devanshi Vadiya' },
+    { id: 'v4', name: 'Ignis', color: 'rose', budget: 100, spent: 0, squad: [], leader: 'Ankit Kumar' },
 ];
 
 // ============================================================

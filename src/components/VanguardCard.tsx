@@ -137,22 +137,23 @@ export function VanguardCard({
         <div className="p-5 space-y-4">
           <div className="flex items-center justify-between">
             {/* Team identity */}
-            <div className="flex items-center gap-4">
+            {/* Team identity */}
+            <div className="flex items-center gap-4 flex-1 min-w-0 mr-4">
               <div
-                className={`w-11 h-11 rounded-lg ${colors.bg} flex items-center justify-center`}
+                className={`w-11 h-11 rounded-lg ${colors.bg} flex items-center justify-center shrink-0`}
                 style={{ boxShadow: `0 0 20px ${colors.accent}` }}
               >
                 <Users className="w-5 h-5 text-white" />
               </div>
-              <div>
+              <div className="min-w-0">
                 <h3 className="text-lg font-bold text-white tracking-tight">{vanguard.name}</h3>
                 <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-semibold text-white/40 uppercase tracking-widest">
-                    Command Unit
+                  <span className="text-[10px] font-semibold text-white/40 uppercase tracking-widest truncate block">
+                    {vanguard.leader ? `Leader: ${vanguard.leader}` : 'Command Unit'}
                   </span>
                   {showReceiptGlow && (
                     <motion.div
-                      className="flex items-center gap-1"
+                      className="flex items-center gap-1 shrink-0"
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0 }}

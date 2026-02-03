@@ -14,6 +14,7 @@ export interface Vanguard {
   budget: number;
   spent: number;
   squad: Student[];
+  leader?: string;
 }
 
 export interface AuctionState {
