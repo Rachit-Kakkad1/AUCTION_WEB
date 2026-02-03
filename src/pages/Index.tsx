@@ -1,78 +1,124 @@
+import { motion } from 'framer-motion';
 import { Header } from '@/components/Header';
 import { AuctionStage } from '@/components/AuctionStage';
 import { VanguardCard } from '@/components/VanguardCard';
-import { useAuction } from '@/hooks/useAuction';
-import { Button } from '@/components/ui/button';
-import { RotateCcw } from 'lucide-react';
+import { useAuctionContext } from '@/context/AuctionContext';
 
-const Index = () => {
-  const {
-    vanguards,
-    currentStudent,
-    availableStudents,
-    handleSale,
-    resetAuction,
-  } = useAuction();
+/**
+ * Main Auction Page — Index
+ * 
+ * ENTRY ANIMATION:
+ * - Header fades in first (frame)
+ * - AuctionStage materializes (focus)
+ * - Stats appear (context)
+ * - Vanguard cards stagger in (reference)
+ */
 
-  return (
-    <div className="min-h-screen bg-background">
-      <Header auctionActive={availableStudents.length > 0} />
+// Easing for authority
+const EASE_ENTER: [number, number, number, number] = [0.0, 0, 0.2, 1];
 
-      <main className="container mx-auto px-4 py-8 space-y-12">
-        {/* Main Auction Stage - Maximized */}
-        <div className="w-full max-w-5xl mx-auto space-y-8">
-          <AuctionStage
-            currentStudent={currentStudent}
-            vanguards={vanguards}
-            onSale={handleSale}
-            remainingCount={availableStudents.length}
-            totalCount={availableStudents.length + vanguards.reduce((acc, v) => acc + v.squad.length, 0)}
-          />
+export default function Index() {
+    const {
+        students,
+        vanguards,
+        currentStudent,
+        handleSale,
+        timeRemaining,
+        isTimerRunning,
+        startTimer,
+        pauseTimer,
+        resetTimer,
+    } = useAuctionContext();
 
-          {/* Stats Summary - Compact Row */}
-          <div className="glass-card rounded-xl p-6 border-border/50">
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
-              <div className="text-center group">
-                <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em] mb-2 group-hover:text-primary transition-colors">Sold</p>
-                <div className="text-3xl font-black text-primary number-display">
-                  {vanguards.reduce((acc, v) => acc + v.squad.length, 0)}
-                </div>
-              </div>
-              <div className="text-center group">
-                <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em] mb-2 group-hover:text-foreground transition-colors">Active</p>
-                <div className="text-3xl font-black text-foreground number-display">
-                  {availableStudents.length}
-                </div>
-              </div>
-              <div className="text-center group">
-                <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em] mb-2 group-hover:text-vanguard-amber transition-colors">Spent</p>
-                <div className="text-3xl font-black text-vanguard-amber number-display">
-                  {vanguards.reduce((sum, v) => sum + v.spent, 0).toFixed(1)}
-                  <span className="text-xs font-bold ml-1">cr</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+    const remainingStudents = students.filter((s) => s.status !== 'sold').length;
+    const soldStudents = students.filter((s) => s.status === 'sold').length;
+    const totalSpent = vanguards.reduce((acc, v) => acc + v.spent, 0);
 
-        {/* Vanguard Grid - 4 Columns */}
-        <div className="space-y-6">
-          <div className="flex items-center justify-between px-2">
-            <div>
-              <h2 className="text-3xl font-black text-foreground tracking-tighter italic">VANGUARD LEADERBOARD</h2>
-              <p className="text-xs text-muted-foreground font-medium uppercase tracking-widest mt-1">Real-time team standings & remaining budgets</p>
-            </div>
-          </div>
+    return (
+        <motion.div
+            className="min-h-screen bg-background"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4 }}
+        >
+            {/* Header — enters first */}
+            <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1, ease: EASE_ENTER }}
+            >
+                <Header auctionActive={true} />
+            </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {vanguards.map((vanguard) => (
-              <VanguardCard key={vanguard.id} vanguard={vanguard} />
-            ))}
-          </div>
-        </div>
-      </main>
-    </div>
-  );
-};
+            <main className="container mx-auto px-4 py-8 space-y-8">
+                {/* Auction Stage — focus element */}
+                <motion.div
+                    initial={{ opacity: 0, filter: 'blur(12px)', scale: 0.98 }}
+                    animate={{ opacity: 1, filter: 'blur(0px)', scale: 1 }}
+                    transition={{ duration: 0.6, delay: 0.3, ease: EASE_ENTER }}
+                >
+                    <AuctionStage
+                        currentStudent={currentStudent}
+                        vanguards={vanguards}
+                        onSale={handleSale}
+                        remainingCount={remainingStudents}
+                        totalCount={students.length}
+                        timeRemaining={timeRemaining}
+                        isTimerRunning={isTimerRunning}
+                        onStartTimer={startTimer}
+                        onPauseTimer={pauseTimer}
+                        onResetTimer={resetTimer}
+                    />
+                </motion.div>
 
-export default Index;
+                {/* Stats Summary */}
+                <motion.div
+                    className="grid grid-cols-3 gap-4"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.4, delay: 0.5, ease: EASE_ENTER }}
+                >
+                    <div className="glass-card rounded-xl p-4 text-center">
+                        <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1">Sold</p>
+                        <p className="text-3xl font-black text-primary number-display">{soldStudents}</p>
+                    </div>
+                    <div className="glass-card rounded-xl p-4 text-center">
+                        <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1">Active</p>
+                        <p className="text-3xl font-black text-foreground number-display">{remainingStudents}</p>
+                    </div>
+                    <div className="glass-card rounded-xl p-4 text-center">
+                        <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-1">Spent</p>
+                        <p className="text-3xl font-black text-primary number-display">{totalSpent.toFixed(1)}<span className="text-lg text-muted-foreground">cr</span></p>
+                    </div>
+                </motion.div>
+
+                {/* Vanguard Leaderboard */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.4, delay: 0.6, ease: EASE_ENTER }}
+                >
+                    <h2 className="text-xl font-black text-foreground uppercase tracking-wider mb-4 italic">
+                        Vanguard Leaderboard
+                    </h2>
+                    <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-4">
+                        {vanguards.map((vanguard, index) => (
+                            <motion.div
+                                key={vanguard.id}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{
+                                    duration: 0.4,
+                                    delay: 0.7 + index * 0.08,
+                                    ease: EASE_ENTER
+                                }}
+                            >
+                                <VanguardCard vanguard={vanguard} />
+                            </motion.div>
+                        ))}
+                    </div>
+                </motion.div>
+            </main>
+        </motion.div>
+    );
+}

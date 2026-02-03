@@ -4,60 +4,71 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Vanguard Elite Auction - Professional Dark Trading Platform Theme */
+/* CodingGita Auction - Institutional Dark Theme
+ * Color Philosophy:
+ * - Black + Gold for institutional authority
+ * - Green ONLY for semantic success/sold states
+ * - Restraint over decoration
+ */
 
 @layer base {
   :root {
-    --background: 0 0% 7%;
+    --background: 0 0% 5%;
     --foreground: 0 0% 95%;
 
-    --card: 0 0% 10%;
+    --card: 0 0% 8%;
     --card-foreground: 0 0% 95%;
 
-    --popover: 0 0% 10%;
+    --popover: 0 0% 8%;
     --popover-foreground: 0 0% 95%;
 
-    --primary: 142 71% 45%;
-    --primary-foreground: 0 0% 100%;
+    /* PRIMARY: Gold for institutional authority */
+    --primary: 43 74% 49%;
+    --primary-foreground: 0 0% 5%;
 
-    --secondary: 215 15% 18%;
+    --secondary: 0 0% 12%;
     --secondary-foreground: 0 0% 85%;
 
-    --muted: 215 15% 15%;
-    --muted-foreground: 215 10% 55%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 50%;
 
-    --accent: 142 71% 45%;
-    --accent-foreground: 0 0% 100%;
+    /* ACCENT: Gold (same as primary) */
+    --accent: 43 74% 49%;
+    --accent-foreground: 0 0% 5%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 215 15% 20%;
-    --input: 215 15% 18%;
-    --ring: 142 71% 45%;
+    --border: 0 0% 15%;
+    --input: 0 0% 12%;
+    --ring: 43 74% 49%;
 
     --radius: 0.75rem;
 
-    /* Custom auction colors */
-    --surface-glass: 215 15% 12%;
-    --surface-elevated: 215 15% 14%;
+    /* Surface colors */
+    --surface-glass: 0 0% 8%;
+    --surface-elevated: 0 0% 10%;
     --text-primary: 0 0% 95%;
-    --text-secondary: 215 10% 65%;
-    --text-muted: 215 10% 45%;
+    --text-secondary: 0 0% 65%;
+    --text-muted: 0 0% 45%;
     
-    /* Vanguard team colors */
+    /* Team colors — for Vanguard teams ONLY */
     --vanguard-emerald: 142 71% 45%;
     --vanguard-blue: 217 91% 60%;
     --vanguard-amber: 38 92% 50%;
     --vanguard-rose: 350 89% 60%;
 
-    /* Status colors */
+    /* Status colors — semantic use only */
     --status-available: 142 71% 45%;
-    --status-sold: 215 10% 45%;
+    --status-sold: 0 0% 45%;
+
+    /* Institutional gold */
+    --gold: 43 74% 49%;
+    --gold-subtle: 43 74% 49%;
   }
 
   .dark {
-    --background: 0 0% 7%;
+    --background: 0 0% 5%;
     --foreground: 0 0% 95%;
   }
 }
@@ -83,11 +94,16 @@
   }
 
   .text-gradient {
-    @apply bg-gradient-to-r from-primary to-emerald-400 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-primary to-amber-500 bg-clip-text text-transparent;
   }
 
+  /* Glow effects — gold primary, team colors for cards */
   .glow-primary {
-    box-shadow: 0 0 20px hsl(var(--primary) / 0.3), 0 0 40px hsl(var(--primary) / 0.1);
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.25), 0 0 40px hsl(var(--primary) / 0.1);
+  }
+
+  .glow-gold {
+    box-shadow: 0 0 25px hsl(var(--gold) / 0.3);
   }
 
   .glow-emerald {
