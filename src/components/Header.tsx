@@ -23,10 +23,10 @@ const GOLD = 'rgba(212, 175, 55, 1)';
 export function Header({ auctionActive }: HeaderProps) {
   return (
     <header className="border-b border-white/10 bg-[#0a0a0f]/90 backdrop-blur-xl sticky top-0 z-50">
-      <div className="container mx-auto px-4 py-4">
+      <div className="container mx-auto px-3 sm:px-4 py-3 sm:py-4">
         <div className="flex items-center justify-between">
           {/* ━━━ BRAND LOCKUP ━━━ */}
-          <Link to="/auction" className="flex items-center gap-4 transition-opacity hover:opacity-80">
+          <Link to="/" className="flex items-center gap-4 transition-opacity hover:opacity-80">
             {/* CodingGita Logo */}
             <div className="w-11 h-11 flex items-center justify-center">
               <img
@@ -38,12 +38,12 @@ export function Header({ auctionActive }: HeaderProps) {
             </div>
             <div>
               <h1
-                className="text-xl font-bold tracking-tight"
+                className="text-base sm:text-xl font-bold tracking-tight"
                 style={{ color: GOLD }}
               >
                 CodingGita Auction
               </h1>
-              <p className="text-xs text-white/40 font-medium tracking-wide uppercase">
+              <p className="hidden sm:block text-xs text-white/40 font-medium tracking-wide uppercase">
                 Official Auction Arena
               </p>
             </div>

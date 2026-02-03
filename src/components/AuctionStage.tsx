@@ -80,10 +80,10 @@ export function AuctionStage({
 
   const sirenRef = useRef<HTMLAudioElement | null>(null);
   const tickRef = useRef<HTMLAudioElement | null>(null);
-  // SOLD AUDIO REFS — Conditional routing
-  const soldDefaultRef = useRef<HTMLAudioElement | null>(null);
+  // SOLD AUDIO REFS — Conditional routing (EXCLUSIVE)
   const sold7CroreRef = useRef<HTMLAudioElement | null>(null);    // EXACTLY 7 crores
   const startupKBCRef = useRef<HTMLAudioElement | null>(null);    // Startup (once)
+  const audioCtxRef = useRef<AudioContext | null>(null);          // Web Audio for default SOLD
 
   // Preload ALL audio on mount
   useEffect(() => {
@@ -97,10 +97,7 @@ export function AuctionStage({
     tick.volume = 0.4;
     tickRef.current = tick;
 
-    // SOLD sounds (from public folder)
-    const soldDefault = new Audio('/kaun_banega_crorepati.mp3');
-    soldDefault.volume = 0.8;
-    soldDefaultRef.current = soldDefault;
+    // 7 Crore special sound (from public folder)
 
     const sold7Crore = new Audio('/7_crore.mp3');
     sold7Crore.volume = 0.9;
@@ -187,20 +184,43 @@ export function AuctionStage({
     setSoldPhase('lock');
     setShowSoldOverlay(true);
 
-    // ━━━ SOLD AUDIO ROUTING ━━━
+    // ━━━ SOLD AUDIO ROUTING (EXCLUSIVE — ONE SOUND PER EVENT) ━━━
+    const playDefaultSOLDSound = () => {
+      // Programmatic gavel tone via Web Audio API
+      try {
+        if (!audioCtxRef.current) {
+          audioCtxRef.current = new AudioContext();
+        }
+        const ctx = audioCtxRef.current;
+        if (ctx.state === 'suspended') {
+          ctx.resume();
+        }
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.frequency.value = 440; // Authoritative A4
+        osc.type = 'sine';
+        gain.gain.setValueAtTime(0.3, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
+        osc.start(ctx.currentTime);
+        osc.stop(ctx.currentTime + 0.4);
+      } catch (e) {
+        console.log('Default SOLD sound failed:', e);
+      }
+    };
+
     const playSOLDSound = (price: number) => {
-      // Special Sound: EXACTLY 7 crores
+      // EXCLUSIVE ROUTING: Exactly one sound per SOLD event
       if (price === 7) {
+        // Special Sound: EXACTLY 7 crores
         if (sold7CroreRef.current) {
           sold7CroreRef.current.currentTime = 0;
           sold7CroreRef.current.play().catch(e => console.log('7 Crore sound failed:', e));
         }
-      }
-
-      // Default Sold Sound (KBC Theme) plays for ALL sales
-      if (soldDefaultRef.current) {
-        soldDefaultRef.current.currentTime = 0;
-        soldDefaultRef.current.play().catch(e => console.log('Default sold sound failed:', e));
+      } else {
+        // Default SOLD sound for ALL other amounts
+        playDefaultSOLDSound();
       }
     };
 
@@ -443,7 +463,7 @@ export function AuctionStage({
                 {soldDetails.price.toFixed(2)}
               </span>
               <span style={{ fontSize: '1.5rem', fontWeight: 600, color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                credits
+                CRORES
               </span>
             </motion.div>
           </motion.div>
@@ -492,8 +512,8 @@ export function AuctionStage({
         </div>
 
         {/* Main Content */}
-        <div className="p-8">
-          <div className="grid lg:grid-cols-2 gap-8">
+        <div className="p-4 sm:p-6 lg:p-8">
+          <div className="grid lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
             {/* Student Info */}
             <div className="space-y-6">
               <div className="flex items-start gap-4">
@@ -516,10 +536,24 @@ export function AuctionStage({
                   <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Base Price</p>
                   <p className="text-xl font-bold text-primary number-display">{BASE_PRICE} cr</p>
                 </div>
-                <div className={`glass-card rounded-lg px-4 py-3 flex-1 border-2 transition-colors ${displayTime <= 5 ? 'border-destructive/50 bg-destructive/10' : 'border-transparent'}`}>
+                <div className={`glass-card rounded-lg px-4 py-3 flex-1 border-2 transition-colors ${displayTime <= 3
+                  ? 'border-destructive bg-destructive/20'
+                  : displayTime <= 5
+                    ? 'border-destructive/50 bg-destructive/10'
+                    : displayTime <= 10
+                      ? 'border-amber-500/50 bg-amber-500/10'
+                      : 'border-transparent'
+                  }`}>
                   <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Timer</p>
                   <div className="flex items-center justify-between">
-                    <p className={`text-xl font-bold number-display ${displayTime <= 5 ? 'text-destructive animate-pulse' : 'text-foreground'}`}>
+                    <p className={`text-xl font-bold number-display ${displayTime <= 3
+                      ? 'text-destructive'
+                      : displayTime <= 5
+                        ? 'text-destructive animate-pulse-slow'
+                        : displayTime <= 10
+                          ? 'text-amber-500'
+                          : 'text-foreground'
+                      }`}>
                       {displayTime}s
                     </p>
                     <div className="flex gap-1">
@@ -545,24 +579,39 @@ export function AuctionStage({
             <div className="space-y-6">
               <div className="space-y-2">
                 <label className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
-                  Select Vanguard
+                  WINNING HOUSE
                 </label>
                 <Select value={selectedVanguard} onValueChange={setSelectedVanguard}>
                   <SelectTrigger className="h-14 bg-secondary border-border text-lg">
-                    <SelectValue placeholder="Choose winning team..." />
+                    <SelectValue placeholder="DECLARE THE HOUSE" />
                   </SelectTrigger>
                   <SelectContent>
-                    {vanguards.map((v) => (
-                      <SelectItem key={v.id} value={v.id}>
-                        <div className="flex items-center gap-3">
-                          <div className={`w-3 h-3 rounded-full ${getVanguardColor(v.color)}`} />
-                          <span>{v.name}</span>
-                          <span className="text-muted-foreground">
-                            ({(v.budget - v.spent).toFixed(2)} cr left)
-                          </span>
-                        </div>
-                      </SelectItem>
-                    ))}
+                    {vanguards.map((v) => {
+                      const remaining = v.budget - v.spent;
+                      const insufficientFunds = remaining < bidAmount;
+                      return (
+                        <SelectItem
+                          key={v.id}
+                          value={v.id}
+                          disabled={insufficientFunds}
+                          className={insufficientFunds ? 'opacity-50' : ''}
+                        >
+                          <div className="flex items-center gap-3">
+                            <div className={`w-3 h-3 rounded-full ${getVanguardColor(v.color)}`} />
+                            <span>{v.name}</span>
+                            {insufficientFunds ? (
+                              <span className="text-destructive font-bold text-xs">
+                                INSUFFICIENT FUNDS
+                              </span>
+                            ) : (
+                              <span className="text-muted-foreground">
+                                ({remaining.toFixed(2)} cr left)
+                              </span>
+                            )}
+                          </div>
+                        </SelectItem>
+                      );
+                    })}
                   </SelectContent>
                 </Select>
               </div>
@@ -570,19 +619,21 @@ export function AuctionStage({
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <label className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
-                    Final Price
+                    WINNING BID
                   </label>
-                  <div className="flex items-center gap-2">
-                    <Input
-                      type="number"
-                      value={bidAmount}
-                      onChange={(e) => setBidAmount(Math.max(0, Number(e.target.value)))}
-                      className="w-24 h-10 text-center text-lg font-bold bg-secondary border-border number-display"
-                      min={0}
-                      step={0.05}
-                    />
-                    <span className="text-muted-foreground font-medium">cr</span>
-                  </div>
+                </div>
+                {/* BID VISUAL DOMINANCE — Largest element in controls */}
+                <div className="flex items-center justify-center gap-3 py-4">
+                  <Input
+                    type="number"
+                    value={bidAmount}
+                    onChange={(e) => setBidAmount(Math.max(0, Number(e.target.value)))}
+                    className="w-28 h-12 text-center text-2xl font-black bg-secondary border-2 border-primary/50 number-display text-primary"
+                    min={0}
+                    step={0.05}
+                    style={{ textShadow: '0 0 20px hsl(43 74% 49% / 0.3)' }}
+                  />
+                  <span className="text-xl font-bold text-foreground uppercase">CRORES</span>
                 </div>
                 <Slider
                   value={[bidAmount]}
@@ -608,14 +659,21 @@ export function AuctionStage({
               <div className="flex gap-3">
                 <Button
                   onClick={handleConfirmSale}
-                  disabled={!selectedVanguard}
-                  className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold glow-primary disabled:opacity-50 disabled:glow-none"
+                  disabled={!selectedVanguard || (selectedTeam && bidAmount > (selectedTeam.budget - selectedTeam.spent))}
+                  className="w-full h-14 bg-primary hover:bg-primary/90 text-primary-foreground font-black text-lg uppercase tracking-wider glow-primary disabled:opacity-50 disabled:glow-none"
                 >
-                  <Gavel className="w-5 h-5 mr-2" />
-                  Confirm Sale
-                  <ChevronRight className="w-5 h-5 ml-2" />
+                  <Gavel className="w-6 h-6 mr-3" />
+                  DECLARE SOLD
+                  <ChevronRight className="w-6 h-6 ml-3" />
                 </Button>
               </div>
+              {/* Budget safety warning */}
+              {selectedTeam && bidAmount > (selectedTeam.budget - selectedTeam.spent) && (
+                <div className="flex items-center gap-2 text-destructive text-sm font-bold">
+                  <AlertCircle className="w-4 h-4" />
+                  <span>INSUFFICIENT FUNDS — {selectedTeam.name} has only {(selectedTeam.budget - selectedTeam.spent).toFixed(2)} CR remaining</span>
+                </div>
+              )}
             </div>
           </div>
         </div>

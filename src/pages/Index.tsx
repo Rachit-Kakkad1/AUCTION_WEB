@@ -50,7 +50,7 @@ export default function Index() {
                 <Header auctionActive={true} />
             </motion.div>
 
-            <main className="container mx-auto px-4 py-8 space-y-8">
+            <main className="container mx-auto px-3 sm:px-4 py-4 sm:py-8 space-y-4 sm:space-y-8">
                 {/* Auction Stage — focus element */}
                 <motion.div
                     initial={{ opacity: 0, filter: 'blur(12px)', scale: 0.98 }}
@@ -73,7 +73,7 @@ export default function Index() {
 
                 {/* Stats Summary */}
                 <motion.div
-                    className="grid grid-cols-3 gap-4"
+                    className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.4, delay: 0.5, ease: EASE_ENTER }}
@@ -101,7 +101,7 @@ export default function Index() {
                     <h2 className="text-xl font-black text-foreground uppercase tracking-wider mb-4 italic">
                         Vanguard Leaderboard
                     </h2>
-                    <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4">
                         {vanguards.map((vanguard, index) => (
                             <motion.div
                                 key={vanguard.id}

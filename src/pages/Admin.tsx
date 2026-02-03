@@ -17,7 +17,7 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
-import { Menu, Search, Edit2, RotateCcw, Save, X, ArrowLeft, Gavel, FastForward } from 'lucide-react';
+import { Menu, Search, Edit2, RotateCcw, Save, X, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import {
     Select,
@@ -38,18 +38,9 @@ const Admin = () => {
     const [editVanguard, setEditVanguard] = useState<string>('');
     const [editPrice, setEditPrice] = useState<number>(0);
 
-    const { students, vanguards, currentStudent, handleSkip, undoSale, updateSale, resetAuction } = useAuction();
+    const { students, vanguards, undoSale, updateSale } = useAuction();
 
-    const handleResetSystem = () => {
-        const userInput = window.prompt("CRITICAL ACTION: This will RESET the entire auction system. All sales and budgets will be cleared. This cannot be undone.\n\nType 'SURE' to confirm:");
-
-        if (userInput === 'SURE') {
-            resetAuction();
-            toast.success("System has been fully reset");
-        } else if (userInput !== null) {
-            toast.error("Reset cancelled. Confirmation text did not match.");
-        }
-    };
+    // REMOVED: handleSkip, currentStudent, resetAuction — Admin is retrospective-only
 
     const handleLogin = (e: React.FormEvent) => {
         e.preventDefault();
@@ -153,15 +144,6 @@ const Admin = () => {
                         <h1 className="text-xl font-bold tracking-tight">Admin Dashboard</h1>
                     </div>
                     <div className="flex items-center gap-3">
-                        <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={handleResetSystem}
-                            className="border-destructive/30 text-destructive hover:bg-destructive/10 hover:text-destructive"
-                        >
-                            <RotateCcw className="w-4 h-4 mr-2" />
-                            Reset System
-                        </Button>
                         <Link to="/auction">
                             <Button variant="outline" size="sm" className="border-border hover:bg-secondary">
                                 Exit Admin
@@ -172,36 +154,7 @@ const Admin = () => {
             </header>
 
             <main className="container mx-auto px-4 py-8 space-y-12 animate-slide-up">
-                {/* Current Student Control - NEW SECTION */}
-                <div className="space-y-4">
-                    <h2 className="text-sm font-bold text-muted-foreground uppercase tracking-[0.2em]">Queue Management</h2>
-                    <div className="glass-card p-6 rounded-2xl border-l-4 border-primary flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl shadow-primary/5">
-                        <div className="flex items-center gap-6">
-                            <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center border border-primary/20">
-                                <Gavel className="w-8 h-8 text-primary" />
-                            </div>
-                            <div>
-                                {currentStudent ? (
-                                    <>
-                                        <h3 className="text-2xl font-black text-foreground">{currentStudent.name}</h3>
-                                        <p className="text-muted-foreground font-mono">GR: {currentStudent.grNumber} • Currently Active in Auction</p>
-                                    </>
-                                ) : (
-                                    <p className="text-muted-foreground italic font-medium">No student currently active in auction</p>
-                                )}
-                            </div>
-                        </div>
-                        <Button
-                            onClick={handleSkip}
-                            disabled={!currentStudent}
-                            variant="secondary"
-                            className="h-14 px-8 text-lg font-bold gap-3 bg-secondary hover:bg-primary hover:text-white transition-all duration-300 rounded-xl"
-                        >
-                            <FastForward className="w-6 h-6" />
-                            Skip to End
-                        </Button>
-                    </div>
-                </div>
+                {/* REMOVED: Queue Management section — Admin cannot influence auction flow */}
 
                 {/* Management Section */}
                 <div className="space-y-6">

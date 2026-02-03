@@ -51,7 +51,7 @@
     --text-primary: 0 0% 95%;
     --text-secondary: 0 0% 65%;
     --text-muted: 0 0% 45%;
-    
+
     /* Team colors — for Vanguard teams ONLY */
     --vanguard-emerald: 142 71% 45%;
     --vanguard-blue: 217 91% 60%;
@@ -125,5 +125,22 @@
   .number-display {
     font-variant-numeric: tabular-nums;
     letter-spacing: -0.02em;
+  }
+
+  /* Timer pressure animation — slow, authoritative pulse (no strobe) */
+  .animate-pulse-slow {
+    animation: pulse-slow 2s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
+  }
+}
+
+@keyframes pulse-slow {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
   }
 }

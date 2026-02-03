@@ -87,6 +87,30 @@ export default function Landing() {
                         backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
                     }}
                 />
+
+                {/* Floating particles — subtle depth */}
+                {[...Array(6)].map((_, i) => (
+                    <motion.div
+                        key={i}
+                        className="absolute w-1 h-1 rounded-full"
+                        style={{
+                            backgroundColor: GOLD,
+                            left: `${15 + i * 15}%`,
+                            top: `${20 + (i % 3) * 25}%`,
+                        }}
+                        initial={{ opacity: 0 }}
+                        animate={{
+                            opacity: isExiting ? 0 : [0, 0.3, 0],
+                            y: isExiting ? 0 : [0, -30, 0],
+                        }}
+                        transition={{
+                            duration: 4 + i * 0.5,
+                            delay: 3 + i * 0.4,
+                            repeat: Infinity,
+                            ease: 'easeInOut',
+                        }}
+                    />
+                ))}
             </div>
 
             {/* ━━━ MAIN CONTENT — CENTERED, VERTICAL STACK ━━━ */}
@@ -111,14 +135,34 @@ export default function Landing() {
                         className="relative"
                         animate={{
                             filter: `drop-shadow(0 0 ${isExiting ? '0px' : '30px'} ${GOLD_SUBTLE})`,
+                            scale: isExiting ? 1 : [1, 1.02, 1],
                         }}
-                        transition={{ duration: 0.6 }}
+                        transition={{
+                            filter: { duration: 0.6 },
+                            scale: { duration: 3, repeat: Infinity, ease: 'easeInOut' },
+                        }}
                     >
                         <img
                             src="/codinggita-logo.png"
                             alt="CodingGita"
                             className="w-32 h-32 md:w-40 md:h-40 object-contain"
                             draggable={false}
+                        />
+                        {/* Subtle ring pulse */}
+                        <motion.div
+                            className="absolute inset-0 rounded-full border-2"
+                            style={{ borderColor: GOLD_SUBTLE }}
+                            initial={{ opacity: 0, scale: 1 }}
+                            animate={{
+                                opacity: isExiting ? 0 : [0, 0.5, 0],
+                                scale: isExiting ? 1 : [1, 1.3, 1.5],
+                            }}
+                            transition={{
+                                duration: 2.5,
+                                delay: 2,
+                                repeat: Infinity,
+                                ease: 'easeOut',
+                            }}
                         />
                     </motion.div>
                 </motion.div>
@@ -207,6 +251,32 @@ export default function Landing() {
                     Authorized Personnel Only
                 </motion.p>
             </div>
+
+            {/* ━━━ CORNER ACCENTS ━━━ */}
+            {['top-left', 'top-right', 'bottom-left', 'bottom-right'].map((pos, i) => (
+                <motion.div
+                    key={pos}
+                    className="absolute w-12 h-12"
+                    style={{
+                        [pos.includes('top') ? 'top' : 'bottom']: '2rem',
+                        [pos.includes('left') ? 'left' : 'right']: '2rem',
+                        borderTop: pos.includes('top') ? `1px solid ${GOLD_SUBTLE}` : 'none',
+                        borderBottom: pos.includes('bottom') ? `1px solid ${GOLD_SUBTLE}` : 'none',
+                        borderLeft: pos.includes('left') ? `1px solid ${GOLD_SUBTLE}` : 'none',
+                        borderRight: pos.includes('right') ? `1px solid ${GOLD_SUBTLE}` : 'none',
+                    }}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{
+                        opacity: isExiting ? 0 : 0.4,
+                        scale: isExiting ? 0.8 : 1,
+                    }}
+                    transition={{
+                        duration: 0.6,
+                        delay: isExiting ? 0 : 2.8 + i * 0.1,
+                        ease: EASE_REVEAL,
+                    }}
+                />
+            ))}
 
             {/* ━━━ BOTTOM ACCENT LINE ━━━ */}
             <motion.div
