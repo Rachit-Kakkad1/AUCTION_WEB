@@ -14,6 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { AuctionCompleteCeremony } from './AuctionCompleteCeremony';
 
 /**
  * AuctionStage — Main auction control with Ceremonial SOLD Animation
@@ -481,19 +482,8 @@ export function AuctionStage({
   );
 
   if (!currentStudent) {
-    return (
-      <div className="glass-card-elevated rounded-2xl p-8 text-center animate-scale-in">
-        <div className="flex flex-col items-center gap-4">
-          <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center">
-            <Gavel className="w-10 h-10 text-primary" />
-          </div>
-          <h2 className="text-3xl font-bold text-gradient">Auction Complete</h2>
-          <p className="text-muted-foreground text-lg">
-            All students have been auctioned successfully
-          </p>
-        </div>
-      </div>
-    );
+    // ━━━ AUCTION COMPLETE — CEREMONIAL FINALE ━━━
+    return <AuctionCompleteCeremony vanguards={vanguards} />;
   }
 
   return (
