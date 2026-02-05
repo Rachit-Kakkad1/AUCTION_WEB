@@ -482,7 +482,17 @@ export function AuctionStage({
   );
 
   if (!currentStudent) {
-    // ━━━ AUCTION COMPLETE — CEREMONIAL FINALE ━━━
+    // ━━━ AUCTION COMPLETE CHECK ━━━
+    // If we are currently showing a SOLD overlay (even for the last student),
+    // we MUST wait for it to finish before showing the Ceremony.
+    if (showSoldOverlay) {
+      return (
+        <>
+          {typeof document !== 'undefined' && createPortal(soldOverlay, document.body)}
+        </>
+      );
+    }
+    // Otherwise, show completion ceremony
     return <AuctionCompleteCeremony vanguards={vanguards} />;
   }
 
