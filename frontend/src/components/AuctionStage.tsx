@@ -1,7 +1,8 @@
 import { Gavel, User, Hash, ChevronRight, AlertCircle, Play, RotateCcw, Ban } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useMotionTemplate, useMotionValue } from 'framer-motion';
+import { MouseEvent } from 'react';
 import { Student, Vanguard } from '@/types/auction';
 import confetti from 'canvas-confetti';
 import { Button } from '@/components/ui/button';
@@ -47,6 +48,9 @@ interface AuctionStageProps {
   onPauseTimer: () => void;
   onResetTimer: () => void;
   onUnsold: (studentId: string) => void;
+  globalFreeze: boolean;
+  activeAnnouncement: string | null;
+  sfxTrigger: { id: string; timestamp: number } | null;
 }
 
 const BASE_PRICE = 0.25;
@@ -69,6 +73,9 @@ export function AuctionStage({
   onPauseTimer,
   onResetTimer,
   onUnsold,
+  globalFreeze,
+  activeAnnouncement,
+  sfxTrigger,
 }: AuctionStageProps) {
   const [bidAmount, setBidAmount] = useState(BASE_PRICE);
   const [selectedVanguard, setSelectedVanguard] = useState<string>('');
@@ -76,6 +83,10 @@ export function AuctionStage({
   const [showSoldOverlay, setShowSoldOverlay] = useState(false);
   const [soldPhase, setSoldPhase] = useState<'lock' | 'declare' | 'release'>('lock');
   const [soldDetails, setSoldDetails] = useState<{ name: string; vanguard: string; price: number; color: string } | null>(null);
+
+  // Motion values for spotlight
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
 
   // UNSOLD ANIMATION STATE
   const [isExitingUnsold, setIsExitingUnsold] = useState(false);
@@ -123,6 +134,27 @@ export function AuctionStage({
 
 
   }, []);
+
+  // ━━━ SFX REACTOR ━━━
+  useEffect(() => {
+    if (!sfxTrigger) return;
+
+    // SFX Dictionary
+    const sounds: Record<string, string> = {
+      gavel: 'https://assets.mixkit.co/active_storage/sfx/2996/2996-preview.mp3',
+      applause: 'https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3',
+      ticking: 'https://assets.mixkit.co/active_storage/sfx/2590/2590-preview.mp3',
+      horn: 'https://assets.mixkit.co/active_storage/sfx/2857/2857-preview.mp3',
+      sold: 'https://assets.mixkit.co/active_storage/sfx/2414/2414-preview.mp3' // Cash register/ding
+    };
+
+    const url = sounds[sfxTrigger.id];
+    if (url) {
+      const audio = new Audio(url);
+      audio.volume = 1.0;
+      audio.play().catch(e => console.error("SFX Play failed", e));
+    }
+  }, [sfxTrigger]);
 
   useEffect(() => {
     const prev = prevTimeRef.current;
@@ -503,6 +535,48 @@ export function AuctionStage({
 
       {typeof document !== 'undefined' && createPortal(soldOverlay, document.body)}
 
+      {/* ANNOUNCEMENT OVERLAY */}
+      <AnimatePresence>
+        {activeAnnouncement && (
+          <motion.div
+            initial={{ y: -100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -100, opacity: 0 }}
+            className="fixed top-24 left-1/2 -translate-x-1/2 z-[5000] max-w-4xl w-full px-6 pointer-events-none"
+          >
+            <div className="bg-primary/90 text-primary-foreground backdrop-blur-md shadow-2xl rounded-2xl p-6 border-4 border-white/20 flex items-center gap-6">
+              <div className="bg-white/20 p-4 rounded-full animate-pulse">
+                <AlertCircle className="w-8 h-8" />
+              </div>
+              <div>
+                <h3 className="text-xl font-black uppercase tracking-widest opacity-80 mb-1">Attention</h3>
+                <p className="text-4xl font-black uppercase tracking-tight leading-none drop-shadow-lg">
+                  {activeAnnouncement}
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* GLOBAL FREEZE OVERLAY */}
+      <AnimatePresence>
+        {globalFreeze && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[6000] bg-black/50 backdrop-blur-sm flex items-center justify-center"
+          >
+            <div className="bg-destructive text-destructive-foreground p-12 rounded-3xl shadow-2xl text-center border-8 border-white/10 animate-pulse">
+              <AlertCircle className="w-24 h-24 mx-auto mb-6" />
+              <h1 className="text-8xl font-black uppercase tracking-tighter mb-4">FROZEN</h1>
+              <p className="text-2xl font-bold uppercase tracking-widest opacity-80">Auction Paused by Controller</p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <div
         className="glass-card-elevated rounded-2xl overflow-hidden animate-slide-up transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1)]"
         style={{
@@ -531,62 +605,133 @@ export function AuctionStage({
         {/* Main Content */}
         <div className="p-4 sm:p-6 lg:p-8">
           <div className="grid lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
-            {/* Student Info */}
-            <div className="space-y-6">
-              <div className="flex items-start gap-4">
-                <div className="w-16 h-16 rounded-xl bg-secondary flex items-center justify-center shrink-0">
-                  <User className="w-8 h-8 text-muted-foreground" />
-                </div>
-                <div className="space-y-1">
-                  <h2 className="text-2xl lg:text-3xl font-bold text-foreground leading-tight">
-                    {currentStudent.name}
-                  </h2>
-                  <div className="flex items-center gap-2 text-muted-foreground">
-                    <Hash className="w-4 h-4" />
-                    <span className="font-mono text-sm">{currentStudent.grNumber}</span>
-                  </div>
-                </div>
+            {/* Student Info — Premium Layout */}
+            <div className="flex flex-col md:flex-row gap-8 items-stretch">
+              {/* ULTRA PREMIUM IMAGE — Left Side */}
+              <div
+                className="shrink-0 w-full md:w-64 lg:w-72 relative group perspective-1000"
+                onMouseMove={(e: MouseEvent<HTMLDivElement>) => {
+                  const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
+                  mouseX.set(e.clientX - left);
+                  mouseY.set(e.clientY - top);
+                }}
+              >
+                <div className="absolute -inset-1 bg-gradient-to-b from-primary/50 to-transparent rounded-2xl blur-md opacity-40 group-hover:opacity-75 transition-opacity duration-700" />
+                <motion.div
+                  className="relative aspect-[3/4] rounded-xl bg-black/40 flex items-center justify-center overflow-hidden border border-white/10 shadow-2xl ring-1 ring-white/5"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  key={currentStudent.id}
+                  transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
+                >
+                  {currentStudent.image_url ? (
+                    <img
+                      src={currentStudent.image_url}
+                      alt={currentStudent.name}
+                      className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 will-change-transform"
+                    />
+                  ) : (
+                    <User className="w-20 h-20 text-white/20" />
+                  )}
+                  {/* Premium Gloss Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-white/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                  <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/80 to-transparent" />
+
+                  {/* Spotlight Effect */}
+                  <motion.div
+                    className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition duration-300 group-hover:opacity-100"
+                    style={{
+                      background: useMotionTemplate`
+                        radial-gradient(
+                          650px circle at ${mouseX}px ${mouseY}px,
+                          rgba(255,255,255,0.15),
+                          transparent 80%
+                        )
+                      `,
+                    }}
+                  />
+                </motion.div>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-3">
-                <div className="glass-card rounded-lg px-4 py-3 flex-1">
-                  <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Base Price</p>
-                  <p className="text-xl font-bold text-primary number-display">{BASE_PRICE} cr</p>
-                </div>
-                <div className={`glass-card rounded-lg px-4 py-3 flex-1 border-2 transition-colors ${displayTime <= 3
-                  ? 'border-destructive bg-destructive/20'
-                  : displayTime <= 5
-                    ? 'border-destructive/50 bg-destructive/10'
-                    : displayTime <= 10
-                      ? 'border-amber-500/50 bg-amber-500/10'
-                      : 'border-transparent'
-                  }`}>
-                  <p className="text-xs text-muted-foreground uppercase tracking-wider mb-1">Timer</p>
-                  <div className="flex items-center justify-between">
-                    <p className={`text-xl font-bold number-display ${displayTime <= 3
-                      ? 'text-destructive'
-                      : displayTime <= 5
-                        ? 'text-destructive animate-pulse-slow'
-                        : displayTime <= 10
-                          ? 'text-amber-500'
-                          : 'text-foreground'
-                      }`}>
-                      {displayTime}s
-                    </p>
-                    <div className="flex gap-1">
-                      {!isTimerRunning ? (
-                        <Button size="icon" variant="ghost" className="h-6 w-6" onClick={onStartTimer}>
-                          <Play className="w-3.5 h-3.5" />
-                        </Button>
-                      ) : (
-                        <Button size="icon" variant="ghost" className="h-6 w-6" onClick={onPauseTimer}>
-                          <div className="w-2 h-2 bg-foreground rounded-sm" />
-                        </Button>
-                      )}
-                      <Button size="icon" variant="ghost" className="h-6 w-6" onClick={onResetTimer}>
-                        <RotateCcw className="w-3.5 h-3.5" />
-                      </Button>
+              {/* Right Side: Identity + Stats + Context */}
+              <div className="flex flex-col flex-1 min-w-0 py-2">
+                {/* Identity Section */}
+                {/* Identity Section */}
+                <div className="relative space-y-2 mb-8">
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-white/90 to-white/70 leading-[0.95] uppercase tracking-tighter drop-shadow-lg break-words hyphens-auto pr-4">
+                    {currentStudent.name}
+                  </h2>
+                  <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-primary/90">
+                      <Hash className="w-4 h-4" />
+                      <span className="font-mono text-base font-bold tracking-widest">{currentStudent.grNumber}</span>
                     </div>
+                  </div>
+                </div>
+
+                {/* Stats Dashboard */}
+                <div className="grid grid-cols-2 gap-4 mt-auto">
+                  {/* Price Card */}
+                  <div className="relative group overflow-hidden rounded-xl bg-gradient-to-br from-white/5 to-transparent border border-white/5 p-5 transition-colors hover:border-primary/30 hover:bg-white/10">
+                    <div className="absolute top-0 right-0 p-3 opacity-20 group-hover:opacity-40 transition-opacity">
+                      <div className="w-8 h-8 rounded-full bg-primary blur-xl" />
+                    </div>
+                    <p className="text-xs font-bold text-muted-foreground uppercase tracking-[0.2em] mb-2">Base Price</p>
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-4xl font-black text-primary number-display tracking-tight">{BASE_PRICE}</span>
+                      <span className="text-sm font-bold text-foreground/60 uppercase">cr</span>
+                    </div>
+                  </div>
+
+                  {/* Timer Card - Reactive */}
+                  <div className={`relative overflow-hidden rounded-xl border transition-all duration-500 p-5 group ${displayTime <= 3
+                    ? 'bg-destructive/10 border-destructive/50 shadow-[0_0_30px_rgba(239,68,68,0.15)]'
+                    : displayTime <= 10
+                      ? 'bg-amber-500/5 border-amber-500/30'
+                      : 'bg-gradient-to-br from-white/5 to-transparent border-white/5'
+                    }`}>
+                    <div className="flex justify-between items-start mb-2">
+                      <p className={`text-xs font-bold uppercase tracking-[0.2em] transition-colors ${displayTime <= 10 ? 'text-foreground' : 'text-muted-foreground'}`}>
+                        Time Remaining
+                      </p>
+                      {/* Integrated Controls */}
+                      <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity absolute top-3 right-3 bg-black/50 rounded-lg p-1 backdrop-blur-sm">
+                        {!isTimerRunning ? (
+                          <Button size="icon" variant="ghost" className="h-6 w-6 hover:text-primary hover:bg-white/10" onClick={(e) => { e.stopPropagation(); onStartTimer(); }}>
+                            <Play className="w-3 h-3 fill-current" />
+                          </Button>
+                        ) : (
+                          <Button size="icon" variant="ghost" className="h-6 w-6 hover:text-primary hover:bg-white/10" onClick={(e) => { e.stopPropagation(); onPauseTimer(); }}>
+                            <div className="w-2 h-2 bg-current rounded-[1px]" />
+                          </Button>
+                        )}
+                        <Button size="icon" variant="ghost" className="h-6 w-6 hover:text-primary hover:bg-white/10" onClick={(e) => { e.stopPropagation(); onResetTimer(); }}>
+                          <RotateCcw className="w-3 h-3" />
+                        </Button>
+                      </div>
+                    </div>
+
+                    <div className="relative z-10">
+                      <p className={`text-4xl font-black number-display tracking-tight leading-none ${displayTime <= 3
+                        ? 'text-destructive drop-shadow-[0_0_10px_rgba(239,68,68,0.5)]'
+                        : displayTime <= 5
+                          ? 'text-destructive animate-pulse-slow'
+                          : displayTime <= 10
+                            ? 'text-amber-500'
+                            : 'text-foreground'
+                        }`}>
+                        {displayTime}<span className="text-lg font-bold text-foreground/40 ml-1">s</span>
+                      </p>
+                    </div>
+
+                    {/* Timer Bar Progress Background */}
+                    <div
+                      className={`absolute bottom-0 left-0 h-1 transition-all duration-1000 ease-linear ${displayTime <= 10 ? 'bg-current opacity-100' : 'bg-primary opacity-50'}`}
+                      style={{
+                        width: `${(displayTime / 15) * 100}%`,
+                        color: displayTime <= 3 ? '#ef4444' : displayTime <= 10 ? '#f59e0b' : ''
+                      }}
+                    />
                   </div>
                 </div>
               </div>

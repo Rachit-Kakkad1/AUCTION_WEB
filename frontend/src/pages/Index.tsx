@@ -31,6 +31,9 @@ export default function Index() {
         startTimer,
         pauseTimer,
         resetTimer,
+        globalFreeze,
+        activeAnnouncement,
+        sfxTrigger,
     } = useAuctionContext();
 
     const remainingStudents = students.filter((s) => s.status !== 'sold' && s.status !== 'unsold').length;
@@ -45,6 +48,22 @@ export default function Index() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4 }}
         >
+            {/* Ambient Background */}
+            <div className="fixed inset-0 pointer-events-none overflow-hidden">
+                <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.03] mix-blend-overlay" />
+                <motion.div
+                    className="absolute -top-[50%] -left-[50%] w-[200%] h-[200%] bg-[radial-gradient(circle_at_center,_var(--primary)_0%,_transparent_25%)] opacity-[0.03]"
+                    animate={{
+                        transform: ['translate(0,0)', 'translate(10%, 10%)', 'translate(-5%, 15%)', 'translate(0,0)'],
+                    }}
+                    transition={{
+                        duration: 20,
+                        ease: "linear",
+                        repeat: Infinity,
+                        repeatType: "mirror"
+                    }}
+                />
+            </div>
             {/* Header — enters first */}
             <motion.div
                 initial={{ opacity: 0, y: -10 }}
@@ -73,6 +92,9 @@ export default function Index() {
                         onStartTimer={startTimer}
                         onPauseTimer={pauseTimer}
                         onResetTimer={resetTimer}
+                        globalFreeze={globalFreeze}
+                        activeAnnouncement={activeAnnouncement}
+                        sfxTrigger={sfxTrigger}
                     />
                 </motion.div>
 

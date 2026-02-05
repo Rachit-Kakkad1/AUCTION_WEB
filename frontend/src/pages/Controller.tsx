@@ -25,6 +25,13 @@ import {
     Wifi,
     WifiOff,
     ChevronRight,
+    ChevronRight,
+    Undo2,
+    Mic2,
+    Volume2,
+    BarChart3,
+    AlertOctagon,
+    Megaphone,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { toast } from 'sonner';
@@ -65,7 +72,17 @@ const Controller = () => {
         startTimer,
         pauseTimer,
         resetTimer,
+        shuffleRemainingQueue,
+        undoLastSale,
+        setGlobalFreeze,
+        broadcastAnnouncement,
+        triggerSfx,
+        globalFreeze,
+        activeAnnouncement,
     } = useAuction();
+
+    // Announcement state
+    const [announcementText, setAnnouncementText] = useState('');
 
     // Track sync status
     useEffect(() => {
@@ -108,6 +125,38 @@ const Controller = () => {
             toast.info(`${nextStudent.name} sent to end of queue`);
         }
     };
+
+    const handleUndo = () => {
+        if (confirm('Are you sure you want to UNDO the last sale?')) {
+            undoLastSale();
+            toast.info('Last sale undone');
+        }
+    };
+
+    const handleFreezeToggle = () => {
+        setGlobalFreeze(!globalFreeze);
+        toast.warning(globalFreeze ? 'Auction Resumed' : 'Auction FROZEN');
+    };
+
+    const handleAnnouncement = (e: React.FormEvent) => {
+        e.preventDefault();
+        broadcastAnnouncement(announcementText);
+        toast.success(`Broadcasting: ${announcementText}`);
+        setAnnouncementText('');
+    };
+
+    const clearAnnouncement = () => {
+        broadcastAnnouncement(null);
+        toast.info('Announcement cleared');
+    };
+
+    const SFX_LIST = [
+        { id: 'gavel', label: 'Gavel', icon: CheckCircle },
+        { id: 'applause', label: 'Applause', icon: Users },
+        { id: 'ticking', label: 'Ticking', icon: Clock },
+        { id: 'sold', label: 'SOLD!', icon: Megaphone },
+        { id: 'horn', label: 'Air Horn', icon: Volume2 },
+    ];
 
     // Calculate stats
     const soldCount = vanguards.reduce((acc, v) => acc + v.squad.length, 0);
@@ -182,6 +231,15 @@ const Controller = () => {
                                 {isOnline ? 'SYNC' : 'OFFLINE'}
                             </span>
                         </div>
+
+                        {/* Global Freeze Indicator */}
+                        {globalFreeze && (
+                            <div className="flex items-center gap-1.5 px-2 py-1 rounded-lg bg-destructive text-destructive-foreground animate-pulse">
+                                <AlertOctagon className="w-3.5 h-3.5" />
+                                <span className="text-[10px] font-bold">FROZEN</span>
+                            </div>
+                        )}
+
                         <Link to="/auction">
                             <Button variant="outline" size="sm">
                                 Main Screen
@@ -192,22 +250,24 @@ const Controller = () => {
             </header>
 
             {/* Soft Alerts */}
-            {alerts.length > 0 && (
-                <div className="px-4 pt-3 space-y-2">
-                    {alerts.map((alert, idx) => (
-                        <div
-                            key={idx}
-                            className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium ${alert.type === 'warning'
-                                ? 'bg-amber-500/10 text-amber-500 border border-amber-500/20'
-                                : 'bg-blue-500/10 text-blue-400 border border-blue-500/20'
-                                }`}
-                        >
-                            <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
-                            {alert.message}
-                        </div>
-                    ))}
-                </div>
-            )}
+            {
+                alerts.length > 0 && (
+                    <div className="px-4 pt-3 space-y-2">
+                        {alerts.map((alert, idx) => (
+                            <div
+                                key={idx}
+                                className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium ${alert.type === 'warning'
+                                    ? 'bg-amber-500/10 text-amber-500 border border-amber-500/20'
+                                    : 'bg-blue-500/10 text-blue-400 border border-blue-500/20'
+                                    }`}
+                            >
+                                <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
+                                {alert.message}
+                            </div>
+                        ))}
+                    </div>
+                )
+            }
 
             <main className="flex-1 p-4 space-y-4 overflow-auto">
                 {/* Timer Controls */}
@@ -254,6 +314,79 @@ const Controller = () => {
                             <RotateCcw className="w-5 h-5" />
                             Reset Timer
                         </Button>
+                    </div>
+                </div>
+
+                {/* GOD-TIER CONTROLS */}
+                <div className="grid grid-cols-2 gap-4">
+                    {/* Undo / Freeze */}
+                    <Button
+                        variant="outline"
+                        onClick={handleUndo}
+                        className="h-14 font-bold border-dashed border-amber-500/50 hover:bg-amber-500/10 text-amber-500"
+                    >
+                        <Undo2 className="w-5 h-5 mr-2" />
+                        Undo Last
+                    </Button>
+                    <Button
+                        variant={globalFreeze ? "destructive" : "outline"}
+                        onClick={handleFreezeToggle}
+                        className={`h-14 font-bold ${globalFreeze ? 'animate-pulse' : 'border-destructive/50 text-destructive hover:bg-destructive/10'}`}
+                    >
+                        {globalFreeze ? <Play className="w-5 h-5 mr-2" /> : <Pause className="w-5 h-5 mr-2" />}
+                        {globalFreeze ? 'RESUME' : 'FREEZE'}
+                    </Button>
+                </div>
+
+                {/* Announcement Panel */}
+                <div className="glass-card rounded-xl p-4">
+                    <div className="flex items-center gap-2 mb-3 text-muted-foreground">
+                        <Megaphone className="w-4 h-4" />
+                        <span className="text-xs font-bold uppercase">Live Announcement</span>
+                    </div>
+                    {activeAnnouncement ? (
+                        <div className="bg-primary/10 border border-primary/20 rounded-lg p-3 flex justify-between items-center">
+                            <span className="font-bold text-primary truncate">{activeAnnouncement}</span>
+                            <Button size="sm" variant="ghost" onClick={clearAnnouncement} className="h-6 w-6 p-0 text-muted-foreground hover:text-destructive">
+                                X
+                            </Button>
+                        </div>
+                    ) : (
+                        <form onSubmit={handleAnnouncement} className="flex gap-2">
+                            <Input
+                                value={announcementText}
+                                onChange={e => setAnnouncementText(e.target.value)}
+                                placeholder="Type message..."
+                                className="h-10 text-sm"
+                            />
+                            <Button type="submit" size="sm" className="w-10 h-10 p-0">
+                                <ArrowRight className="w-4 h-4" />
+                            </Button>
+                        </form>
+                    )}
+                </div>
+
+                {/* SFX Panel */}
+                <div className="glass-card rounded-xl p-4">
+                    <div className="flex items-center gap-2 mb-3 text-muted-foreground">
+                        <Volume2 className="w-4 h-4" />
+                        <span className="text-xs font-bold uppercase">Soundboard</span>
+                    </div>
+                    <div className="grid grid-cols-3 gap-2">
+                        {SFX_LIST.map(sfx => (
+                            <Button
+                                key={sfx.id}
+                                variant="secondary"
+                                size="sm"
+                                onClick={() => {
+                                    triggerSfx(sfx.id);
+                                    toast.success(`Played ${sfx.label}`);
+                                }}
+                                className="h-10 text-xs font-bold"
+                            >
+                                {sfx.label}
+                            </Button>
+                        ))}
                     </div>
                 </div>
 
@@ -323,6 +456,14 @@ const Controller = () => {
                                 <FastForward className="w-5 h-5" />
                                 Send to End of Queue
                             </Button>
+                            <Button
+                                onClick={shuffleRemainingQueue}
+                                variant="outline"
+                                className="w-full h-12 text-sm font-bold gap-2 rounded-xl mt-2 border-dashed"
+                            >
+                                <Users className="w-5 h-5" />
+                                Shuffle Remaining Queue
+                            </Button>
                         </>
                     ) : (
                         <p className="text-muted-foreground italic text-center py-3 text-sm">
@@ -332,39 +473,41 @@ const Controller = () => {
                 </div>
 
                 {/* Queue Preview (READ-ONLY) */}
-                {queuePreview.length > 0 && (
-                    <div className="glass-card rounded-xl p-4">
-                        <div className="flex items-center justify-between mb-3">
-                            <div className="flex items-center gap-2">
-                                <Users className="w-4 h-4 text-muted-foreground" />
-                                <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
-                                    UPCOMING QUEUE
-                                </span>
-                            </div>
-                            <span className="text-[10px] font-mono text-muted-foreground">
-                                READ-ONLY
-                            </span>
-                        </div>
-                        <div className="space-y-1.5">
-                            {queuePreview.map((student, idx) => (
-                                <div
-                                    key={student.id}
-                                    className="flex items-center gap-3 px-3 py-2 rounded-lg bg-secondary/30"
-                                >
-                                    <span className="w-5 h-5 rounded-full bg-secondary flex items-center justify-center text-[10px] font-bold text-muted-foreground">
-                                        {idx + 2}
-                                    </span>
-                                    <span className="text-sm font-medium text-foreground truncate flex-1">
-                                        {student.name}
-                                    </span>
-                                    <span className="font-mono text-[10px] text-muted-foreground">
-                                        {student.grNumber}
+                {
+                    queuePreview.length > 0 && (
+                        <div className="glass-card rounded-xl p-4">
+                            <div className="flex items-center justify-between mb-3">
+                                <div className="flex items-center gap-2">
+                                    <Users className="w-4 h-4 text-muted-foreground" />
+                                    <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
+                                        UPCOMING QUEUE
                                     </span>
                                 </div>
-                            ))}
+                                <span className="text-[10px] font-mono text-muted-foreground">
+                                    READ-ONLY
+                                </span>
+                            </div>
+                            <div className="space-y-1.5">
+                                {queuePreview.map((student, idx) => (
+                                    <div
+                                        key={student.id}
+                                        className="flex items-center gap-3 px-3 py-2 rounded-lg bg-secondary/30"
+                                    >
+                                        <span className="w-5 h-5 rounded-full bg-secondary flex items-center justify-center text-[10px] font-bold text-muted-foreground">
+                                            {idx + 2}
+                                        </span>
+                                        <span className="text-sm font-medium text-foreground truncate flex-1">
+                                            {student.name}
+                                        </span>
+                                        <span className="font-mono text-[10px] text-muted-foreground">
+                                            {student.grNumber}
+                                        </span>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                )}
+                    )
+                }
 
                 {/* Vanguard Budget Panel (READ-ONLY — TAP TO VIEW SQUAD) */}
                 <div className="glass-card rounded-xl p-4">
@@ -425,7 +568,7 @@ const Controller = () => {
                         </div>
                     </div>
                 </div>
-            </main>
+            </main >
 
             {/* Footer — Health Panel */}
             <footer className="p-3 border-t border-border/50 bg-card/30">

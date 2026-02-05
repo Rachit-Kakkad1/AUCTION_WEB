@@ -15,7 +15,7 @@
  */
 
 import { Student, StudentIdentity, Vanguard } from '@/types/auction';
-import STUDENT_ROSTER from '@/data/students_dummy.json';
+import STUDENT_ROSTER from '@/data/students_data.json';
 
 // ============================================================
 // STORAGE KEY - Version for future migrations
@@ -51,6 +51,14 @@ export interface PersistedState {
     timer: TimerState;
     /** Timestamp of last modification */
     updatedAt: string;
+    /** For Undo functionality */
+    lastAction: { type: 'sale'; studentId: string; vanguardId: string; price: number } | null;
+    /** For Freeze functionality */
+    globalFreeze: boolean;
+    /** For Announcement functionality */
+    activeAnnouncement: string | null;
+    /** For SFX functionality */
+    sfxTrigger: { id: string; timestamp: number } | null;
 }
 
 // ============================================================
@@ -96,8 +104,13 @@ export function seededShuffle<T>(array: T[], seed: string): T[] {
 // RAW DATA - Imported from clean JSON source
 // ============================================================
 
-// Cast to ensure strict type compliance with Identity schema
-const RAW_STUDENTS: StudentIdentity[] = STUDENT_ROSTER as StudentIdentity[];
+// Map raw JSON to StudentIdentity schema
+const RAW_STUDENTS: StudentIdentity[] = (STUDENT_ROSTER as any[]).map((s) => ({
+    id: s.UniversityUID,
+    name: s.studentName,
+    grNumber: s.UniversityUID, // Using UID as GR Number as well for display
+    image_url: s.imageUrl || `https://placehold.co/400x400?text=${encodeURIComponent(s.studentName)}`, // Fallback image
+}));
 
 const INITIAL_VANGUARDS: Vanguard[] = [
     { id: 'v1', name: 'Terra', color: 'emerald', budget: 100, spent: 0, squad: [], leader: 'Pal Pathak' },
@@ -141,7 +154,9 @@ function generateSeed(): string {
 }
 
 function createInitialState(seed: string): PersistedState {
-    const shuffledIds = RAW_STUDENTS.map(s => s.id);
+    const rawIds = RAW_STUDENTS.map(s => s.id);
+    // Initial Shuffle: Randomize the entire list using the seed
+    const shuffledIds = seededShuffle(rawIds, seed);
 
     const students: Record<string, Student> = {};
     for (const raw of RAW_STUDENTS) {
@@ -165,6 +180,10 @@ function createInitialState(seed: string): PersistedState {
             pausedRemaining: null,
         },
         updatedAt: new Date().toISOString(),
+        lastAction: null,
+        globalFreeze: false,
+        activeAnnouncement: null,
+        sfxTrigger: null,
     };
 }
 
@@ -275,6 +294,9 @@ export function confirmSale(studentId: string, vanguardId: string, price: number
         spent: vanguard.spent + price,
         squad: [...vanguard.squad, state.students[studentId]],
     };
+
+    // Record for UNDO
+    state.lastAction = { type: 'sale', studentId, vanguardId, price };
 
     // Remove from queue
     state.queue = state.queue.slice(1);
@@ -599,6 +621,103 @@ export function getVanguardsArray(state: PersistedState): Vanguard[] {
     return Object.values(state.vanguards);
 }
 
+
 export function getAllStudentsArray(state: PersistedState): Student[] {
     return Object.values(state.students);
+}
+
+/**
+ * Shuffle the remaining students in the queue (skipping queue[0]).
+ * Used by Controller to randomize upcoming auctions.
+ */
+export function shuffleRemainingQueue(): PersistedState {
+    const state = loadState();
+    if (!state) throw new Error('No auction state');
+
+    if (state.queue.length <= 2) {
+        // Nothing to shuffle effectively
+        return state;
+    }
+
+    const current = state.queue[0];
+    const remaining = state.queue.slice(1);
+
+    // Generate a new seed component for this shuffle to ensure randomness relative to previous
+    const shuffleSeed = `${state.shuffleSeed}-reshuffle-${Date.now()}`;
+    const shuffledRemaining = seededShuffle(remaining, shuffleSeed);
+
+    state.queue = [current, ...shuffledRemaining];
+
+    saveState(state);
+    return state;
+}
+
+// ============================================================
+// GOD-TIER FEATURES
+// ============================================================
+
+export function undoLastSale(): PersistedState {
+    const state = loadState();
+    if (!state) throw new Error('No state');
+    if (!state.lastAction) throw new Error('No action to undo');
+
+    const { studentId, vanguardId, price } = state.lastAction;
+
+    // 1. Revert Vanguard
+    const vanguard = state.vanguards[vanguardId];
+    state.vanguards[vanguardId] = {
+        ...vanguard,
+        spent: vanguard.spent - price,
+        squad: vanguard.squad.filter(s => s.id !== studentId),
+    };
+
+    // 2. Revert Student
+    const student = state.students[studentId];
+    state.students[studentId] = {
+        ...student,
+        status: 'available',
+        soldTo: undefined,
+        soldPrice: undefined,
+    };
+
+    // 3. Put back at START of queue
+    state.queue = [studentId, ...state.queue];
+
+    // 4. Clear undo history
+    state.lastAction = null;
+
+    saveState(state);
+    return state;
+}
+
+export function setGlobalFreeze(frozen: boolean): PersistedState {
+    const state = loadState();
+    if (!state) throw new Error('No state');
+    state.globalFreeze = frozen;
+    // Also pause timer if freezing
+    if (frozen) {
+        if (state.timer.startedAt !== null) {
+            const remaining = getTimeRemaining(state.timer);
+            state.timer.startedAt = null;
+            state.timer.pausedRemaining = remaining;
+        }
+    }
+    saveState(state);
+    return state;
+}
+
+export function broadcastAnnouncement(text: string | null): PersistedState {
+    const state = loadState();
+    if (!state) throw new Error('No state');
+    state.activeAnnouncement = text;
+    saveState(state);
+    return state;
+}
+
+export function triggerSfx(sfxId: string): PersistedState {
+    const state = loadState();
+    if (!state) throw new Error('No state');
+    state.sfxTrigger = { id: sfxId, timestamp: Date.now() };
+    saveState(state);
+    return state;
 }

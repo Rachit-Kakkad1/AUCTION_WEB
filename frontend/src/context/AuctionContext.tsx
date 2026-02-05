@@ -21,6 +21,14 @@ interface AuctionContextType {
     pauseTimer: () => void;
     resetTimer: () => void;
     sendToEndOfQueue: (studentId: string) => void;
+    shuffleRemainingQueue: () => void;
+    undoLastSale: () => void;
+    setGlobalFreeze: (frozen: boolean) => void;
+    broadcastAnnouncement: (text: string | null) => void;
+    triggerSfx: (sfxId: string) => void;
+    globalFreeze: boolean;
+    activeAnnouncement: string | null;
+    sfxTrigger: { id: string; timestamp: number } | null;
 }
 
 const AuctionContext = createContext<AuctionContextType | undefined>(undefined);
@@ -73,7 +81,12 @@ export const AuctionProvider: React.FC<{ children: React.ReactNode }> = ({ child
     const isTimerRunning = useMemo(() =>
         state.timer.startedAt !== null && state.timer.pausedRemaining === null,
         [state.timer]
+        [state.timer]
     );
+    const globalFreeze = state.globalFreeze;
+    const activeAnnouncement = state.activeAnnouncement;
+    const sfxTrigger = state.sfxTrigger;
+
 
     // Actions - all delegate to store and update local state
     const handleSale = useCallback((studentId: string, vanguardId: string, price: number) => {
@@ -192,6 +205,51 @@ export const AuctionProvider: React.FC<{ children: React.ReactNode }> = ({ child
         }
     }, []);
 
+    const shuffleRemainingQueue = useCallback(() => {
+        try {
+            const newState = store.shuffleRemainingQueue();
+            setState(newState);
+        } catch (err) {
+            console.error('Shuffle failed:', err);
+        }
+    }, []);
+
+    const undoLastSale = useCallback(() => {
+        try {
+            const newState = store.undoLastSale();
+            setState(newState);
+        } catch (err) {
+            console.error('Undo last sale failed:', err);
+        }
+    }, []);
+
+    const setGlobalFreeze = useCallback((frozen: boolean) => {
+        try {
+            const newState = store.setGlobalFreeze(frozen);
+            setState(newState);
+        } catch (err) {
+            console.error('Set global freeze failed:', err);
+        }
+    }, []);
+
+    const broadcastAnnouncement = useCallback((text: string | null) => {
+        try {
+            const newState = store.broadcastAnnouncement(text);
+            setState(newState);
+        } catch (err) {
+            console.error('Broadcast announcement failed:', err);
+        }
+    }, []);
+
+    const triggerSfx = useCallback((sfxId: string) => {
+        try {
+            const newState = store.triggerSfx(sfxId);
+            setState(newState);
+        } catch (err) {
+            console.error('Trigger SFX failed:', err);
+        }
+    }, []);
+
     const value = {
         students,
         vanguards,
@@ -211,6 +269,14 @@ export const AuctionProvider: React.FC<{ children: React.ReactNode }> = ({ child
         pauseTimer,
         resetTimer,
         sendToEndOfQueue,
+        shuffleRemainingQueue,
+        undoLastSale,
+        setGlobalFreeze,
+        broadcastAnnouncement,
+        triggerSfx,
+        globalFreeze,
+        activeAnnouncement,
+        sfxTrigger,
     };
 
     return <AuctionContext.Provider value={value}>{children}</AuctionContext.Provider>;

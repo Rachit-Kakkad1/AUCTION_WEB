@@ -1,5 +1,5 @@
 import { Menu, Settings, Trophy, Users, Shield } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuctionContext } from '@/context/AuctionContext';
 import {
   Sheet,
@@ -32,6 +32,7 @@ const GOLD = 'rgba(212, 175, 55, 1)';
 
 export function Header({ auctionActive }: HeaderProps) {
   const { students, vanguards } = useAuctionContext();
+  const navigate = useNavigate();
 
   // Create Leaderboard: Sold students sorted by price (Highest First)
   const soldStudents = students
@@ -78,7 +79,10 @@ export function Header({ auctionActive }: HeaderProps) {
               >
                 CodingGita Auction
               </h1>
-              <p className="hidden sm:block text-xs text-white/40 font-medium tracking-wide uppercase">
+              <p
+                className="hidden sm:block text-xs text-white/40 font-medium tracking-wide uppercase select-none cursor-default"
+                onDoubleClick={() => navigate('/controller')}
+              >
                 Official Auction Arena
               </p>
             </div>
