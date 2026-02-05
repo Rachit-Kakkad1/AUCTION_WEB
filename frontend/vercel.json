@@ -1,9 +1,13 @@
 {
-  "rewrites": [
+  "headers": [
     {
-      "source": "/google(.*)\\.html",
-      "destination": "/google$1.html"
-    },
+      "source": "/(.*\\.xml)",
+      "headers": [
+        { "key": "Content-Type", "value": "text/xml; charset=utf-8" }
+      ]
+    }
+  ],
+  "rewrites": [
     {
       "source": "/(.*)",
       "destination": "/index.html"
