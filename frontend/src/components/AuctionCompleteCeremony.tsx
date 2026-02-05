@@ -206,7 +206,9 @@ const VanguardCard = ({ vanguard, index }: { vanguard: Vanguard; index: number }
                 style={{ x: iconX, y: iconY, z: 40 }}
                 className={`transform-style-3d p-3.5 rounded-full bg-gradient-to-t from-black/50 to-white/5 border ${theme.border} shadow-[0_10px_20px_rgba(0,0,0,0.5)]`}
               >
-                <Shield size={34} className={`${theme.accent} drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]`} strokeWidth={1.5} />
+                <h3 className={`text-3xl font-black italic tracking-tighter ${theme.accent} drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] select-none`}>
+                  {vanguard.name.substring(0, 2).toUpperCase()}
+                </h3>
               </motion.div>
 
               {/* Middle: Floating Typography */}

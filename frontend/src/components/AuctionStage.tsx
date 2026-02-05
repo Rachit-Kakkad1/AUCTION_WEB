@@ -614,7 +614,9 @@ export function AuctionStage({
                           className={insufficientFunds ? 'opacity-50' : ''}
                         >
                           <div className="flex items-center gap-3">
-                            <div className={`w-3 h-3 rounded-full ${getVanguardColor(v.color)}`} />
+                            <div className={`w-8 h-6 rounded flex items-center justify-center text-[10px] font-black border border-white/10 shadow-sm ${getVanguardColor(v.color)} text-white tracking-widest bg-opacity-90`}>
+                              {v.name.substring(0, 2).toUpperCase()}
+                            </div>
                             <span>{v.name}</span>
                             {insufficientFunds ? (
                               <span className="text-destructive font-bold text-xs">
