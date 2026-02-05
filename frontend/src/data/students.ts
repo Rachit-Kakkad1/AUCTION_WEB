@@ -144,12 +144,12 @@ function shuffleArray<T>(array: T[]): T[] {
   return shuffled;
 }
 
-export const allStudents: Student[] = shuffleArray([
+export const allStudents: Student[] = [
   ...block3Students,
   ...block4Students,
   ...block5Students,
   ...block6Students,
-]).map(student => ({
+].map(student => ({
   ...student,
   status: 'available' as const,
 }));
@@ -161,4 +161,4 @@ export const initialVanguards = [
   { id: 'v4', name: 'Vanguard Nova', color: 'rose', budget: 100, spent: 0, squad: [] },
 ];
 
-export const getShuffledStudents = () => shuffleArray(allStudents.map(s => ({ ...s, status: 'available' as const, soldTo: undefined, soldPrice: undefined })));
+export const getShuffledStudents = () => allStudents.map(s => ({ ...s, status: 'available' as const, soldTo: undefined, soldPrice: undefined }));

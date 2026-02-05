@@ -141,7 +141,7 @@ function generateSeed(): string {
 }
 
 function createInitialState(seed: string): PersistedState {
-    const shuffledIds = seededShuffle(RAW_STUDENTS.map(s => s.id), seed);
+    const shuffledIds = RAW_STUDENTS.map(s => s.id);
 
     const students: Record<string, Student> = {};
     for (const raw of RAW_STUDENTS) {

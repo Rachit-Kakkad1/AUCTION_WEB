@@ -98,18 +98,52 @@ const VanguardCard = ({ vanguard, index }: { vanguard: Vanguard; index: number }
   const sheenX = useTransform(x, [-0.5, 0.5], [-50, 50]);
   const sheenY = useTransform(y, [-0.5, 0.5], [-50, 50]);
 
-  // color map
+  // color map - explicitly defined full classes for Tailwind
   const getTheme = (name: string) => {
     switch (name.toUpperCase()) {
-      case 'TERRA': return { bg: 'from-[#0a1f0a] to-[#020502]', border: 'border-emerald-500/30', accent: 'text-emerald-400', glow: 'emerald' };
-      case 'AQUA': return { bg: 'from-[#05101a] to-[#020305]', border: 'border-cyan-500/30', accent: 'text-cyan-400', glow: 'cyan' };
-      case 'IGNIS': return { bg: 'from-[#1f0a0a] to-[#050202]', border: 'border-rose-500/30', accent: 'text-rose-400', glow: 'rose' };
-      case 'AERO': return { bg: 'from-[#0f1218] to-[#020205]', border: 'border-sky-300/30', accent: 'text-sky-200', glow: 'sky' };
-      default: return { bg: 'from-[#111] to-black', border: 'border-amber-500/30', accent: 'text-amber-400', glow: 'amber' };
+      case 'TERRA': return {
+        bg: 'from-[#0a1f0a] to-[#020502]',
+        border: 'border-emerald-500/30',
+        accent: 'text-emerald-400',
+        rankOne: 'bg-emerald-500 text-black shadow-[0_0_10px_rgba(16,185,129,0.5)]'
+      };
+      case 'AQUA': return {
+        bg: 'from-[#05101a] to-[#020305]',
+        border: 'border-cyan-500/30',
+        accent: 'text-cyan-400',
+        rankOne: 'bg-cyan-500 text-black shadow-[0_0_10px_rgba(6,182,212,0.5)]'
+      };
+      case 'IGNIS': return {
+        bg: 'from-[#1f0a0a] to-[#050202]',
+        border: 'border-rose-500/30',
+        accent: 'text-rose-400',
+        rankOne: 'bg-rose-500 text-black shadow-[0_0_10px_rgba(244,63,94,0.5)]'
+      };
+      case 'AERO': return {
+        bg: 'from-[#0f1218] to-[#020205]',
+        border: 'border-sky-300/30',
+        accent: 'text-sky-200',
+        rankOne: 'bg-sky-300 text-black shadow-[0_0_10px_rgba(125,211,252,0.5)]'
+      };
+      default: return {
+        bg: 'from-[#111] to-black',
+        border: 'border-amber-500/30',
+        accent: 'text-amber-400',
+        rankOne: 'bg-amber-500 text-black shadow-[0_0_10px_rgba(245,158,11,0.5)]'
+      };
     }
   };
 
   const theme = getTheme(vanguard.name);
+
+  // Helper for Title Case
+  const formatName = (name: string) => {
+    return name
+      .toLowerCase()
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  };
 
   // Get Top 4 Squad Members
   const topSquad = [...vanguard.squad]
@@ -235,11 +269,11 @@ const VanguardCard = ({ vanguard, index }: { vanguard: Vanguard; index: number }
                 {topSquad.map((student, i) => (
                   <div key={student.id || i} className="flex items-center justify-between p-2.5 rounded-lg border border-transparent hover:border-white/10 hover:bg-white/5 transition-all group/item">
                     <div className="flex items-center gap-3 text-left overflow-hidden">
-                      <div className={`w-5 h-5 rounded flex flex-shrink-0 items-center justify-center font-bold text-[9px] ${i === 0 ? `bg-${theme.glow}-500 text-black shadow-[0_0_10px_rgba(255,255,255,0.5)]` : 'bg-white/10 text-white/40'}`}>
+                      <div className={`w-5 h-5 rounded flex flex-shrink-0 items-center justify-center font-bold text-[9px] ${i === 0 ? theme.rankOne : 'bg-white/10 text-white/40'}`}>
                         {i + 1}
                       </div>
                       <div className="min-w-0">
-                        <p className="text-white/80 font-bold text-xs leading-tight truncate group-hover/item:text-white transition-colors">{student.name}</p>
+                        <p className="text-white/80 font-bold text-xs leading-tight truncate group-hover/item:text-white transition-colors">{formatName(student.name)}</p>
                       </div>
                     </div>
                     <div className="text-right flex-shrink-0 ml-2">
