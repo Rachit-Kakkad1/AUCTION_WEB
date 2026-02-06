@@ -1,4 +1,17 @@
-import { Gavel, User, Hash, ChevronRight, AlertCircle, Play, RotateCcw, Ban } from 'lucide-react';
+import {
+  Gavel,
+  Trophy,
+  Users,
+  AlertCircle,
+  Clock,
+  Search,
+  Hash,
+  User,
+  ChevronRight,
+  Play,
+  RotateCcw,
+  Ban
+} from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence, useMotionTemplate, useMotionValue } from 'framer-motion';
@@ -16,6 +29,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { AuctionCompleteCeremony } from './AuctionCompleteCeremony';
+import { StudentSearch } from './StudentSearch';
 
 /**
  * AuctionStage — Main auction control with Ceremonial SOLD Animation
@@ -168,7 +182,7 @@ export function AuctionStage({
 
     if (curr <= 5 && curr > 0 && curr < prev && tickRef.current) {
       tickRef.current.currentTime = 0;
-      tickRef.current.play().catch(e => console.log('Tick failed:', e));
+      // tickRef.current.play().catch(e => console.log('Tick failed:', e));
     }
 
     if (curr === 0 && prev > 0 && !hasPlayedHornRef.current) {
@@ -208,7 +222,7 @@ export function AuctionStage({
 
     const remaining = (selectedTeam?.budget || 0) - (selectedTeam?.spent || 0);
     if (bidAmount > remaining) {
-      setError(`${selectedTeam?.name} has insufficient budget (${remaining.toFixed(2)} cr remaining)`);
+      setError(`${selectedTeam?.name} has insufficient budget(${remaining.toFixed(2)} cr remaining)`);
       return;
     }
 
@@ -253,8 +267,8 @@ export function AuctionStage({
 
     const playSOLDSound = (price: number) => {
       // EXCLUSIVE ROUTING: Exactly one sound per SOLD event
-      if (price === 7) {
-        // Special Sound: EXACTLY 7 crores
+      if (price >= 7 && price < 8) {
+        // Special Sound: 7.xx crores (7.00 to 7.99)
         if (sold7CroreRef.current) {
           sold7CroreRef.current.currentTime = 0;
           sold7CroreRef.current.play().catch(e => console.log('7 Crore sound failed:', e));
@@ -373,7 +387,7 @@ export function AuctionStage({
               left: 0,
               right: 0,
               bottom: 0,
-              background: `radial-gradient(ellipse 80% 60% at 50% 50%, rgba(212, 175, 55, 0.08) 0%, transparent 70%)`,
+              background: `radial - gradient(ellipse 80 % 60 % at 50 % 50 %, rgba(212, 175, 55, 0.08) 0 %, transparent 70 %)`,
               pointerEvents: 'none',
             }}
             initial={{ opacity: 0 }}
@@ -594,11 +608,20 @@ export function AuctionStage({
                 Live Auction
               </span>
             </div>
-            <div className="text-sm font-medium text-muted-foreground">
-              <span className="text-primary font-bold">{totalCount - remainingCount + 1}</span>
-              <span className="mx-1">/</span>
-              <span>{totalCount}</span>
-            </div>
+            <StudentSearch
+              trigger={
+                <div className="flex items-center gap-3 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 group cursor-pointer backdrop-blur-md shadow-sm hover:shadow-lg hover:shadow-primary/5 active:scale-95">
+                  <Search className="w-3.5 h-3.5 text-primary group-hover:text-primary-foreground transition-colors" />
+                  <div className="flex flex-col items-start leading-none gap-0.5">
+                    <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest group-hover:text-white/60 transition-colors">Database</span>
+                    <span className="text-xs font-bold text-white group-hover:text-primary transition-colors number-display">{remainingCount} Available</span>
+                  </div>
+                  <div className="hidden sm:flex ml-1 px-1.5 py-0.5 rounded bg-white/5 border border-white/5 text-[9px] font-mono text-white/30 group-hover:text-white/50 transition-colors">
+                    ⌘K
+                  </div>
+                </div>
+              }
+            />
           </div>
         </div>
 
@@ -642,12 +665,12 @@ export function AuctionStage({
                     className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition duration-300 group-hover:opacity-100"
                     style={{
                       background: useMotionTemplate`
-                        radial-gradient(
-                          650px circle at ${mouseX}px ${mouseY}px,
-                          rgba(255,255,255,0.15),
-                          transparent 80%
+radial - gradient(
+  650px circle at ${mouseX}px ${mouseY}px,
+  rgba(255, 255, 255, 0.15),
+  transparent 80 %
                         )
-                      `,
+  `,
                     }}
                   />
                 </motion.div>
@@ -658,7 +681,14 @@ export function AuctionStage({
                 {/* Identity Section */}
                 {/* Identity Section */}
                 <div className="relative space-y-2 mb-8">
-                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-white/90 to-white/70 leading-[0.95] uppercase tracking-tighter drop-shadow-lg break-words hyphens-auto pr-4">
+                  <h2
+                    className="font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-white/90 to-white/70 leading-[0.9] uppercase tracking-tighter drop-shadow-lg pr-4 break-words"
+                    style={{
+                      fontSize: currentStudent.name.length > 25 ? '2rem' : currentStudent.name.length > 18 ? '2.5rem' : '3.5rem',
+                      lineHeight: '1.05',
+                      textWrap: 'balance'
+                    }}
+                  >
                     {currentStudent.name}
                   </h2>
                   <div className="flex items-center gap-4">
@@ -684,14 +714,14 @@ export function AuctionStage({
                   </div>
 
                   {/* Timer Card - Reactive */}
-                  <div className={`relative overflow-hidden rounded-xl border transition-all duration-500 p-5 group ${displayTime <= 3
+                  <div className={`relative overflow - hidden rounded - xl border transition - all duration - 500 p - 5 group ${displayTime <= 3
                     ? 'bg-destructive/10 border-destructive/50 shadow-[0_0_30px_rgba(239,68,68,0.15)]'
                     : displayTime <= 10
                       ? 'bg-amber-500/5 border-amber-500/30'
                       : 'bg-gradient-to-br from-white/5 to-transparent border-white/5'
-                    }`}>
+                    } `}>
                     <div className="flex justify-between items-start mb-2">
-                      <p className={`text-xs font-bold uppercase tracking-[0.2em] transition-colors ${displayTime <= 10 ? 'text-foreground' : 'text-muted-foreground'}`}>
+                      <p className={`text - xs font - bold uppercase tracking - [0.2em] transition - colors ${displayTime <= 10 ? 'text-foreground' : 'text-muted-foreground'} `}>
                         Time Remaining
                       </p>
                       {/* Integrated Controls */}
@@ -712,23 +742,23 @@ export function AuctionStage({
                     </div>
 
                     <div className="relative z-10">
-                      <p className={`text-4xl font-black number-display tracking-tight leading-none ${displayTime <= 3
+                      <p className={`text - 4xl font - black number - display tracking - tight leading - none ${displayTime <= 3
                         ? 'text-destructive drop-shadow-[0_0_10px_rgba(239,68,68,0.5)]'
                         : displayTime <= 5
                           ? 'text-destructive animate-pulse-slow'
                           : displayTime <= 10
                             ? 'text-amber-500'
                             : 'text-foreground'
-                        }`}>
+                        } `}>
                         {displayTime}<span className="text-lg font-bold text-foreground/40 ml-1">s</span>
                       </p>
                     </div>
 
                     {/* Timer Bar Progress Background */}
                     <div
-                      className={`absolute bottom-0 left-0 h-1 transition-all duration-1000 ease-linear ${displayTime <= 10 ? 'bg-current opacity-100' : 'bg-primary opacity-50'}`}
+                      className={`absolute bottom - 0 left - 0 h - 1 transition - all duration - 1000 ease - linear ${displayTime <= 10 ? 'bg-current opacity-100' : 'bg-primary opacity-50'} `}
                       style={{
-                        width: `${(displayTime / 15) * 100}%`,
+                        width: `${(displayTime / 15) * 100}% `,
                         color: displayTime <= 3 ? '#ef4444' : displayTime <= 10 ? '#f59e0b' : ''
                       }}
                     />
@@ -759,7 +789,7 @@ export function AuctionStage({
                           className={insufficientFunds ? 'opacity-50' : ''}
                         >
                           <div className="flex items-center gap-3">
-                            <div className={`w-8 h-6 rounded flex items-center justify-center text-[10px] font-black border border-white/10 shadow-sm ${getVanguardColor(v.color)} text-white tracking-widest bg-opacity-90`}>
+                            <div className={`w - 8 h - 6 rounded flex items - center justify - center text - [10px] font - black border border - white / 10 shadow - sm ${getVanguardColor(v.color)} text - white tracking - widest bg - opacity - 90`}>
                               {v.name.substring(0, 2).toUpperCase()}
                             </div>
                             <span>{v.name}</span>

@@ -50,7 +50,6 @@ export default function Index() {
         >
             {/* Ambient Background */}
             <div className="fixed inset-0 pointer-events-none overflow-hidden">
-                <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.03] mix-blend-overlay" />
                 <motion.div
                     className="absolute -top-[50%] -left-[50%] w-[200%] h-[200%] bg-[radial-gradient(circle_at_center,_var(--primary)_0%,_transparent_25%)] opacity-[0.03]"
                     animate={{

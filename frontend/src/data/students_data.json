@@ -1,710 +1,674 @@
 [
-{
-"studentName": "ABDUL HAQUE",
-"University": "SUxCG 714",
-"UniversityUID": "108444",
-"imageUrl": "https://res.cloudinary.com/dv3jsenpu/image/upload/v1770111942/abdul_b3x8f9.jpg"
-},
-{
-"studentName": "ADITYA KUMAR",
-"University": "SUxCG 702",
-"UniversityUID": "108716",
-"imageUrl": "https://i.postimg.cc/rwV7WKwH/Gemini-Generated-Image-s9u3a3s9u3a3s9u3.png"
-},
-{
-"studentName": "AMAN KUMAR",
-"University": "SUxCG 702",
-"UniversityUID": "108500",
-"imageUrl": "https://avatars.githubusercontent.com/u/224962508?v=4"
-},
-{
-"studentName": "AMRIT RAJ",
-"University": "SUxCG 702",
-"UniversityUID": "108587",
-"imageUrl": "https://image2url.com/r2/default/images/1770271471501-1b33e5a4-f0e2-44ae-95fd-1f8f9b5090a2.jpeg"
-},
-{
-"studentName": "ANISHA CHHAJER",
-"University": "SUxCG 714",
-"UniversityUID": "108565",
-"imageUrl": "https://res.cloudinary.com/dq7hb3fah/image/upload/v1770271187/Screenshot_2026-02-03_162035_auymxx.png"
-},
-{
-"studentName": "ANKIT KUMAR Bharatpur",
-"University": "SUxCG 702",
-"UniversityUID": "108436",
-"imageUrl": "https://res.cloudinary.com/dt0y5mjaq/image/upload/v1770274013/WhatsApp_Image_2026-02-05_at_12.15.58_rlxfeh.jpg"
-},
-{
-"studentName": "ANKIT KUMAR Patna",
-"University": "SUxCG 714",
-"UniversityUID": "108706",
-"imageUrl": "https://res.cloudinary.com/dxwlm3gex/image/upload/v1770271858/Screenshot_2025-08-02_100957_uzmadj.png"
-},
-{
-"studentName": "ARJUN DUBEY",
-"University": "SUxCG 714",
-"UniversityUID": "108696",
-"imageUrl": "https://res.cloudinary.com/dphtrtpjx/image/upload/v1770288903/IMG-20260205-WA0001_xfwpxe.jpg"
-},
-{
-"studentName": "ATUL KUMAR SINGH",
-"University": "SUxCG 714",
-"UniversityUID": "108589",
-"imageUrl": "https://res.cloudinary.com/dv5jwhu5t/image/upload/v1770112010/WhatsApp_Image_2026-02-03_at_3_15_07_PM-Picsart-AiImageEnhancer_mj3yoq.jpg"
-},
-{
-"studentName": "BACHHAV PRITESH VIKRAM",
-"University": "SUxCG 714",
-"UniversityUID": "108654",
-"imageUrl": "https://res.cloudinary.com/dzmso2ukz/image/upload/v1767710904/prit_v53ufo.jpg"
-},
-{
-"studentName": "BAJANIYA DAKSH VIJAYKUMAR",
-"University": "SUxCG 714",
-"UniversityUID": "108653",
-"imageUrl": "https://media.licdn.com/dms/image/v2/D4E03AQF2lRi3Zn-jRQ/profile-displayphoto-scale_200_200/B4EZuruJVDGYAY-/0/1768112562045?e=1772064000&v=beta&t=NmeMYgYmAJm7jf9ec0EiTG3Fvtf_9qa3-jymDsLMtN0"
-},
-{
-"studentName": "CHAUDHARI SAHIL VINUBHAI",
-"University": "SUxCG 702",
-"UniversityUID": "108709",
-"imageUrl": "https://cdn.phototourl.com/uploads/2026-02-03-549e0f23-0fd9-45e3-b92c-5d5d70130d0e.jpg"
-},
-{
-"studentName": "CHIRAG PRAJAPAT",
-"University": "SUxCG 702",
-"UniversityUID": "108302",
-"imageUrl": "https://image2url.com/r2/default/images/1770271230017-d4cd0054-3b63-42e8-8aea-00a26e19dbe2.jpeg"
-},
-{
-"studentName": "DANGAR SHREYANSH DHARMESHBHAI",
-"University": "SUxCG 702",
-"UniversityUID": "108929",
-"imageUrl": "https://ibb.co/Z6yDqq0r"
-},
-{
-"studentName": "DASHRAT SINGH RAJPUROHIT",
-"University": "SUxCG 714",
-"UniversityUID": "108682",
-"imageUrl": "https://res.cloudinary.com/dyp6zbyjd/image/upload/v1770119085/WhatsApp_Image_2025-11-16_at_10.40.09_b162367d_pkwxej.jpg"
-},
-{
-"studentName": "DEEPAK KUMAR",
-"University": "SUxCG 714",
-"UniversityUID": "108429",
-"imageUrl": "https://res.cloudinary.com/dzeyeqk8e/image/upload/v1770278663/WhatsApp_Image_2026-02-05_at_1.02.55_PM_hv1ojy.jpg"
-},
-{
-"studentName": "DEVASI TRIKAM MANGILAL",
-"University": "SUxCG 714",
-"UniversityUID": "108541",
-"imageUrl": "https://aggregate-silver-ykhnbggbyn.edgeone.app/WhatsApp%20Image%202026-02-03%20at%2016.04.55.jpeg"
-},
-{
-"studentName": "DHRUV OZHA",
-"University": "SUxCG 702",
-"UniversityUID": "108624",
-"imageUrl": "https://i.postimg.cc/mrnzYWZG/1000029830.png"
-},
-{
-"studentName": "DHRUVIBEN PATEL",
-"University": "SUxCG 714",
-"UniversityUID": "109110",
-"imageUrl": "https://res.cloudinary.com/db3htfvvx/image/upload/v1770271445/Screenshot_2026-02-03_162558_lzas7c.png"
-},
-{
-"studentName": "DHVANIT ASHISHBHAI KANABAR",
-"University": "SUxCG 714",
-"UniversityUID": "108616",
-"imageUrl": "https://res.cloudinary.com/dr84lv5ym/image/upload/v1770316607/WhatsApp_Image_2026-02-05_at_11.47.36_PM_1_1_hyhp5f.jpg"
-},
-{
-"studentName": "DOSHI NISHIT GAURANG",
-"University": "SUxCG 714",
-"UniversityUID": "108622",
-"imageUrl": "https://res.cloudinary.com/df1pm6a4x/image/upload/v1770178210/Screenshot_2026-02-04_093956_tpwfrp.png"
-},
-{
-"studentName": "DUBAL VEDANT PARESHBHAI",
-"University": "SUxCG 702",
-"UniversityUID": "108687"
-},
-{
-"studentName": "Dev Daxitkumar patel",
-"University": "SUxCG 714",
-"UniversityUID": "108581",
-"imageUrl": "https://res.cloudinary.com/dre3wdpfu/image/upload/v1770271488/Photograph_qykuyy.png"
-},
-{
-"studentName": "GABALE RITESH RUPESH",
-"University": "SUxCG 714",
-"UniversityUID": "108476",
-"imageUrl": "https://media.licdn.com/dms/image/v2/D4E03AQH4P-pf8sMpog/profile-displayphoto-scale_200_200/B4EZtVk0ZUJQAY-/0/1766667274513?e=1771459200&v=beta&t=O_k6JhL5aQCQYsMG17_TM6XYYpyAWVLg1LJU8HQq518"
-},
-{
-"studentName": "GHORI KAHAN NARESHBHAI",
-"University": "SUxCG 714",
-"UniversityUID": "108686",
-"imageUrl": "https://media.licdn.com/dms/image/v2/D5603AQG31FvqfMYNYw/profile-displayphoto-scale_400_400/B56Zs6DtuUJsAg-/0/1766205612278?e=1772064000&v=beta&t=gfEUfAuq3Llqw_aFk6zKVDtmNmlP0FghdsXu9ed1JL0"
-},
-{
-"studentName": "HANUMAN SINGH",
-"University": "SUxCG 714",
-"UniversityUID": "108711",
-"imageUrl": "https://cdn.phototourl.com/uploads/2026-02-03-62b0af0a-2dd6-412e-8139-0c08f25f1fb5.jpg"
-},
-{
-"studentName": "HARSHIT KUMAR",
-"University": "SUxCG 714",
-"UniversityUID": "108685",
-"imageUrl": "https://res.cloudinary.com/difsagudo/image/upload/v1770118404/linkedin_aggam8.png"
-},
-{
-"studentName": "HEMANG SINGH SOLANKI",
-"University": "SUxCG 714",
-"UniversityUID": "108751",
-"imageUrl": "https://image2url.com/images/1764515720697-f4d7da8f-9425-4dec-8d37-26fe3112f1bc.jpeg"
-},
-{
-"studentName": "HETAVI MAHENDRA PANCHOTIA",
-"University": "SUxCG 714",
-"UniversityUID": "108563",
-"imageUrl": "https://drive.google.com/file/d/1BnAQ4KCkv3Qz-PAC8PdhxpOcOYMl-yI5/view"
-},
-{
-"studentName": "HIRPARA CHITT HITESHKUMAR",
-"University": "SUxCG 714",
-"UniversityUID": "108552",
-"imageUrl": "https://image2url.com/r2/bucket1/images/1766558182628-32abc985-d1c6-4e5f-886a-90cbb66f3941.jpeg"
-},
-{
-"studentName": "JAIN TULYA BINESH",
-"University": "SUxCG 702",
-"UniversityUID": "108584",
-"imageUrl": "https://res.cloudinary.com/dvlbmmboc/image/upload/v1770112544/profile-pic_y5385j.png"
-},
-{
-"studentName": "JANI MANAN BHAVESHBHAI",
-"University": "SUxCG 702",
-"UniversityUID": "108649",
-"imageUrl": "https://avatars.githubusercontent.com/u/225340993?s=400&u=02e006d1a75a1b99af23beaa57d34a032fba972a&v=4"
-},
-{
-"studentName": "JANJIRALA SAIPRASAN RAMESHBHAI",
-"University": "SUxCG 702",
-"UniversityUID": "108398",
-"imageUrl": "https://avatars.githubusercontent.com/u/224969012?v=4"
-},
-{
-"studentName": "JONTY PATEL",
-"University": "SUxCG 714",
-"UniversityUID": "108683",
-"imageUrl": "https://res.cloudinary.com/dhsotri6d/image/upload/v1770271413/LMS_ibdlld.jpg"
-},
-{
-"studentName": "KAKKAD RACHIT HIREN",
-"University": "SUxCG 714",
-"UniversityUID": "108715",
-"imageUrl": "https://res.cloudinary.com/dr84lv5ym/image/upload/v1766822886/Gemini_Generated_Image_frr4u1frr4u1frr4_satzu8.png"
-},
-{
-"studentName": "KAMLESH BHIMABHAI CHANDELA",
-"University": "SUxCG 714",
-"UniversityUID": "108360",
-"imageUrl": "https://res.cloudinary.com/dsuhb6swy/image/upload/v1767764610/Screenshot_2026-01-07_111318_cpzfzv.png"
-},
-{
-"studentName": "KANANI YASHVI MAULIKBHAI",
-"University": "SUxCG 714",
-"UniversityUID": "108571",
-"imageUrl": "https://drive.google.com/file/d/1wyYwdWMhSe-3tFM7b_xyR66h9W-hk51A/view?usp=sharing"
-},
-{
-"studentName": "KARETIYA PARTH SANJAYBHAI",
-"University": "SUxCG 702",
-"UniversityUID": "108740",
-"imageUrl": "https://i.postimg.cc/qqTVtwFw/Untitled-design-(1).png"
-},
-{
-"studentName": "KAVATHIYA HARSH PARULBHAI",
-"University": "SUxCG 702",
-"UniversityUID": "108538"
-},
-{
-"studentName": "KRISHNA SOLANKI",
-"University": "SUxCG 702",
-"UniversityUID": "108797",
-"imageUrl": "https://smart-apricot-ridtgwx5hj.edgeone.app/MYPHOTO.jpeg"
-},
-{
-"studentName": "KSHITIJ PANDEY",
-"University": "SUxCG 702",
-"UniversityUID": "108798"
-},
-{
-"studentName": "KULDEEP PATEL",
-"University": "SUxCG 702",
-"UniversityUID": "107962"
-},
-{
-"studentName": "Khatri Smit Manoj",
-"University": "SUxCG 702",
-"UniversityUID": "109236"
-},
-{
-"studentName": "LUMBHANI MAYANKBHAI BHAVESHBHAI",
-"University": "SUxCG 702",
-"UniversityUID": "108618",
-"imageUrl": "https://media.licdn.com/dms/image/v2/D4E03AQGUt3DBEn0CGQ/profile-displayphoto-crop_800_800/B4EZs8P4SVGkAI-/0/1766242355751?e=1771459200&v=beta&t=Hex0qdazX0mV60NdZIxSHYmKozgPDXGDZ5-3bqz4zBY"
-},
-{
-"studentName": "MANN PATEL",
-"University": "SUxCG 714",
-"UniversityUID": "108585"
-},
-{
-"studentName": "MANSURI JILAN FARIDBHAI",
-"University": "SUxCG 714",
-"UniversityUID": "108623",
-"imageUrl": "https://res.cloudinary.com/doxsyif22/image/upload/v1770271427/WhatsApp_Image_2026-02-05_at_11.30.41_AM_sa4yes.jpg"
-},
-{
-"studentName": "MEMAN MOHAMMAD AMMAR ASIF",
-"University": "SUxCG 702",
-"UniversityUID": "108726",
-"imageUrl": "https://image2url.com/r2/default/images/1770114968022-4f2f9faa-93eb-4b67-b8b1-3684e280ec48.jpg"
-},
-{
-"studentName": "MUNDHE HIMMAT HANUMAN",
-"University": "SUxCG 714",
-"UniversityUID": "108800",
-"imageUrl": "https://res.cloudinary.com/dhsswexri/image/upload/v1770315826/me_While_qx1sti.jpg"
-},
-{
-"studentName": "NAYAKPARA PRINCE VIJAYBHAI",
-"University": "SUxCG 714",
-"UniversityUID": "108692",
-"imageUrl": "https://res.cloudinary.com/dhpmqm013/image/upload/v1770192469/WhatsApp_Image_2026-02-04_at_13.32.32_qhscx9.jpg"
-},
-{
-"studentName": "NIKHIL RAJ",
-"University": "SUxCG 702",
-"UniversityUID": "108459",
-"imageUrl": "https://res-console.cloudinary.com/dkiez6yqc/thumbnails/v1/image/upload/v1770272960/TmlraGlsX3NmZndidg==/drilldown"
-},
-{
-"studentName": "NITISH KUMAR",
-"University": "SUxCG 714",
-"UniversityUID": "108795",
-"imageUrl": "https://res.cloudinary.com/dbknqb3e7/image/upload/v1770271685/1767853370488_uclzab.jpg"
-},
-{
-"studentName": "Neev Patel",
-"University": "SUxCG 702",
-"UniversityUID": "107359",
-"imageUrl": "https://res.cloudinary.com/dmqkfsaca/image/upload/v1770118415/WhatsApp_Image_2026-02-03_at_4.58.15_PM_hz56z1.jpg"
-},
-{
-"studentName": "PALAN JALAK ANANDKUMAR",
-"University": "SUxCG 702",
-"UniversityUID": "108714",
-"imageUrl": "https://avatars.githubusercontent.com/u/225344229?s=400&u=1af066e4f63fcc60a45853ccebe1ba065ed77cc5&v=4"
-},
-{
-"studentName": "PANCHAL KREYABEN BHAVESHBHAI",
-"University": "SUxCG 702",
-"UniversityUID": "108569",
-"imageUrl": "https://drive.google.com/file/d/1k8S5FyjMVYQIJx8SEZtcU8RjdfRvAHxU/view?usp=drive_link"
-},
-{
-"studentName": "PANDYA HARSHIT RAHULBHAI",
-"University": "SUxCG 714",
-"UniversityUID": "108660",
-"imageUrl": "https://ik.imagekit.io/29112007/IMG_20250907_132229-comprassed.jpg"
-},
-{
-"studentName": "PARAKHIYA RUTVI SUNILBHAI",
-"University": "SUxCG 702",
-"UniversityUID": "108545",
-"imageUrl": "https://avatars.githubusercontent.com/u/224969532?s=400&u=7102edface3255b9f5a30cfa38d88f661298ee75&v=4"
-},
-{
-"studentName": "PATEL ANSH HIRENBHAI",
-"University": "SUxCG 714",
-"UniversityUID": "108617",
-"imageUrl": "https://ansh-photo.edgeone.app/ANSH%20PHOTO.png"
-},
-{
-"studentName": "PATEL ANSH MAHESHKUMAR",
-"University": "SUxCG 702",
-"UniversityUID": "108579"
-},
-{
-"studentName": "PATEL DHARMIBAHEN MAHESHKUMAR",
-"University": "SUxCG 702",
-"UniversityUID": "108691",
-"imageUrl": "https://avatars.githubusercontent.com/u/226024353?s=400&u=a00f614c34151e92696e3668921826a3c91f1b83&v=4"
-},
-{
-"studentName": "PATEL DHYEYKUMAR JATIN",
-"University": "SUxCG 702",
-"UniversityUID": "108583"
-},
-{
-"studentName": "PATEL DRUP PRAVINBHAI",
-"University": "SUxCG 702",
-"UniversityUID": "108546",
-"imageUrl": "https://wandering-azure-ll3hcmpsht.edgeone.app/2d13ef56-01a3-4e16-aadc-7ea9fb9dff96.png"
-},
-{
-"studentName": "PATEL HARSHIL HITENDRAKUMAR",
-"University": "SUxCG 714",
-"UniversityUID": "108543",
-"imageUrl": "https://icy-teal-ylwx7c4jy1.edgeone.app/h.jpeg"
-},
-{
-"studentName": "PATEL JAL HITESHKUMAR",
-"University": "SUxCG 702",
-"UniversityUID": "108648",
-"imageUrl": "https://resulting-crimson-3oxdxpjfbv.edgeone.app/0ef752c9-3f5d-491e-9bce-6db35dfaf363.jpg"
-},
-{
-"studentName": "PATEL JAY AMITBHAI",
-"University": "SUxCG 714",
-"UniversityUID": "108725",
-"imageUrl": "https://rubber-gold-91bco2ahm3.edgeone.app/ChatGPT%20Image%20Jan%201,%202026,%2002_17_48%20PM.png"
-},
-{
-"studentName": "PATEL JIVAN PARSHOTAM",
-"University": "SUxCG 714",
-"UniversityUID": "108796",
-"imageUrl": "https://res.cloudinary.com/dkohpqbdj/image/upload/v1770271335/profile_nbhijj.jpg"
-},
-{
-"studentName": "PATEL KHUSH PANKAJKUMAR",
-"University": "SUxCG 702",
-"UniversityUID": "108645",
-"imageUrl": "https://lh3.googleusercontent.com/gg/AMW1TPo7j50cQaa1ibfZZv3VZuoVUK5Hi6i9_rWxK72n8H5s69hyhNjLVhzuL-_00_V6VsRl_mujIrc7JZiPHjRTPRMl_v49-V81jYytAaBAOqu8QSfoyMStFX4u1ZNRyBQuigP2I9gAalsIRjdEYjYtKH929H1OAXpM4U3N-AahOAvVVegxL0M=s1024-rj-mp2"
-},
-{
-"studentName": "PATEL MAHARSHI JIGNESHKUMAR",
-"University": "SUxCG 714",
-"UniversityUID": "108688",
-"imageUrl": "https://res.cloudinary.com/dxgcm4xth/image/upload/v1770271848/ChatGPT_Image_Dec_24_2025_10_09_58_PM_optimized_950_iuqmde.png"
-},
-{
-"studentName": "PATEL MAHI AMITKUMAR",
-"University": "SUxCG 714",
-"UniversityUID": "108564",
-"imageUrl": "https://res.cloudinary.com/dq7hb3fah/image/upload/v1770271507/Screenshot_2026-02-05_113444_tzdbof.png"
-},
-{
-"studentName": "PATEL MANANKUMAR NILESHKUMAR",
-"University": "SUxCG 714",
-"UniversityUID": "108659",
-"imageUrl": "https://res.cloudinary.com/dxzo7jfbn/image/upload/v1770271139/photo1_nsxmyy.jpg"
-},
-{
-"studentName": "PATEL PRIYANSH NAYANKUMAR",
-"University": "SUxCG 714",
-"UniversityUID": "108658",
-"imageUrl": "https://expected-blue-55b2kmvgyh.edgeone.app/pri%20pic.jpeg"
-},
-{
-"studentName": "PATEL PURNANSH KETANKUMAR",
-"University": "SUxCG 702",
-"UniversityUID": "108553",
-"imageUrl": "https://res.cloudinary.com/djo9apq7q/image/upload/v1770271427/WhatsApp_Image_2025-11-07_at_09.49.36_a0aa010e_bs2qdl.jpg"
-},
-{
-"studentName": "PATEL RANI RAKESHKUMAR",
-"University": "SUxCG 714",
-"UniversityUID": "108087",
-"imageUrl": "https://res.cloudinary.com/dpktusyjs/image/upload/v1770283801/Screenshot_2026-02-05_145749_w7yo2b.png"
-},
-{
-"studentName": "PATEL VEDANTKUMAR CHETANBHAI",
-"University": "SUxCG 702",
-"UniversityUID": "108708",
-"imageUrl": "https://res.cloudinary.com/dv7bazp5k/image/upload/v1770271141/portfoliophoto_chnbyp.jpg"
-},
-{
-"studentName": "PATEL VISHV VILISH",
-"University": "SUxCG 714",
-"UniversityUID": "108801",
-"imageUrl": "https://res.cloudinary.com/drj44l5df/image/upload/v1770118953/p_de8zf6.jpg"
-},
-{
-"studentName": "PATEL VISHWA BHAVESHKUMAR",
-"University": "SUxCG 702",
-"UniversityUID": "109046",
-"imageUrl": "https://avatars.githubusercontent.com/u/225901469?v=4"
-},
-{
-"studentName": "PATEL VISHWA JAYESHKUMAR",
-"University": "SUxCG 702",
-"UniversityUID": "108615",
-"imageUrl": "https://avatars.githubusercontent.com/u/224971540?v=4"
-},
-{
-"studentName": "PATHAK PALKUMAR DAMJIBHAI",
-"University": "SUxCG 714",
-"UniversityUID": "108689",
-"imageUrl": "https://res.cloudinary.com/diekdvh6t/image/upload/v1767412003/me_og_az5odf.jpg"
-},
-{
-"studentName": "PRAJAPATI KRISHNA RAJESHKUMAR",
-"University": "SUxCG 702",
-"UniversityUID": "108582",
-"imageUrl": "https://i.postimg.cc/50JwZSMm/professional-edit.jpg"
-},
-{
-"studentName": "PRAJAPATI NANDINIBEN BHARATBHAI",
-"University": "SUxCG 714",
-"UniversityUID": "108802",
-"imageUrl": "https://drive.google.com/file/d/1lA0AOf7iWP70NZqD0fu-exfFVodY1ukY/view?usp=drivesdk"
-},
-{
-"studentName": "PRAJAPATI VINEET BHAVESHKUMAR",
-"University": "SUxCG 714",
-"UniversityUID": "108695",
-"imageUrl": "https://res.cloudinary.com/dyclllyqr/image/upload/v1770271294/picofme_1_xlprgh.png"
-},
-{
-"studentName": "PRASHANT KENETH PARMAR",
-"University": "SUxCG 714",
-"UniversityUID": "108697",
-"imageUrl": "https://res.cloudinary.com/dgib19szk/image/upload/v1767781842/WhatsApp_Image_2025-12-19_at_6.26.39_PM_sqhrst.jpg"
-},
-{
-"studentName": "PRATHVIK MEHRA",
-"University": "SUxCG 714",
-"UniversityUID": "108758",
-"imageUrl": "https://res.cloudinary.com/dgg85vi0a/image/upload/v1770112050/professional-photo_zbsnrz.jpg"
-},
-{
-"studentName": "PRIYA",
-"University": "SUxCG 714",
-"UniversityUID": "108572",
-"imageUrl": "https://drive.google.com/file/d/1h62swAcirg-fZpiqJJgc1dwfUAAETIqc/view?usp=sharing"
-},
-{
-"studentName": "PRIYANK KHATRI",
-"University": "SUxCG 702",
-"UniversityUID": "108693",
-"imageUrl": "https://res.cloudinary.com/dox5vwbyk/image/upload/v1757997275/IMG_20250907_182156_130_spug5p.jpg"
-},
-{
-"studentName": "RAJPUT DEVISINGH JAWANSINGH",
-"University": "SUxCG 714",
-"UniversityUID": "108757",
-"imageUrl": "https://res.cloudinary.com/dewymrwzf/image/upload/v1770112889/Gemini_Generated_Image_uaglbwuaglbwuagl____2_l94gus.png"
-},
-{
-"studentName": "RAKSHITRAJ YADAV",
-"University": "SUxCG 714",
-"UniversityUID": "108542",
-"imageUrl": "https://res.cloudinary.com/dphtrtpjx/image/upload/v1770112466/Rakshit_Raj_EDITH_jgfyot.jpg"
-},
-{
-"studentName": "RATHOD HET ASHVINKUMAR",
-"University": "SUxCG 702",
-"UniversityUID": "108652",
-"imageUrl": "https://media.licdn.com/dms/image/v2/D4E03AQEd50GY_ptmqQ/profile-displayphoto-scale_200_200/B4EZsylrQmGoAY-/0/1766080298229?e=1772064000&v=beta&t=PHEypC9ZPvz1FIU-mNaiMctUxu7KWAzDVSXM6-RzQ1k"
-},
-{
-"studentName": "RATHOD RISHIRAJSINH PUSHPENDRASINH",
-"University": "SUxCG 714",
-"UniversityUID": "108580",
-"imageUrl": "https://avatars.githubusercontent.com/u/224968108?s=400&u=5f0d42cbbdc046d02efc8c21b6e8989ec24810cf&v=4"
-},
-{
-"studentName": "RAUSHAN KUMAR",
-"University": "SUxCG 702",
-"UniversityUID": "108651"
-},
-{
-"studentName": "RAVAL MUNJAL ASHISHKUMAR",
-"University": "SUxCG 714",
-"UniversityUID": "108854",
-"imageUrl": "https://res.cloudinary.com/dpoa5mehq/image/upload/v1770271314/photo_xj0sms.jpg"
-},
-{
-"studentName": "RISHAB RAVIKUMAR CHANDGOTHIA",
-"University": "SUxCG 714",
-"UniversityUID": "108713",
-"imageUrl": "https://media.licdn.com/dms/image/v2/D4D03AQG1Zx7TEY3Z7g/profile-displayphoto-scale_400_400/B4DZwi8mXEIAAg-/0/1770112838452?e=1771459200&v=beta&t=mrBveHpXBITMF3QejevFlr4EB8gJYSywmUBjFC6Mnt4"
-},
-{
-"studentName": "RISHIKESH SINGH",
-"University": "SUxCG 714",
-"UniversityUID": "108551",
-"imageUrl": "https://res.cloudinary.com/dpkugdw9y/image/upload/v1770273125/lates_fniofe.jpg"
-},
-{
-"studentName": "RITURAJ JHA",
-"University": "SUxCG 702",
-"UniversityUID": "108458",
-"imageUrl": "https://res.cloudinary.com/dtqsbbz5r/image/upload/v1770273294/temp_image_jybjzq.png"
-},
-{
-"studentName": "RONIT KUMAR SONI",
-"University": "SUxCG 702",
-"UniversityUID": "108428"
-},
-{
-"studentName": "ROY HET JAYESHKUMAR",
-"University": "SUxCG 702",
-"UniversityUID": "108644",
-"imageUrl": "https://i.postimg.cc/kMZ0K2Nt/Whats-App-Image-2026-02-05-at-11-29-35-AM.jpg"
-},
-{
-"studentName": "SABASANA ARYAN NAREDRAKUMAR",
-"University": "SUxCG 714",
-"UniversityUID": "108690",
-"imageUrl": "https://avatars.githubusercontent.com/u/226010537?s=400&u=5b8460e62a352fd014b17faa3558a6ab1ea5027c&v=4"
-},
-{
-"studentName": "SACHIN PATEL",
-"University": "SUxCG 702",
-"UniversityUID": "108890",
-"imageUrl": "https://i.postimg.cc/8CFVj8xM/whatsapp-1234r.jpg"
-},
-{
-"studentName": "SAHOO PRIYABRATA VIRENDRABHAI",
-"University": "SUxCG 714",
-"UniversityUID": "108799",
-"imageUrl": "https://media.licdn.com/dms/image/v2/D5603AQHKrPFcmqaUTw/profile-displayphoto-crop_800_800/B56ZtforQCJIAM-/0/1766836057802?e=1772064000&v=beta&t=T9B0FRXRW7wFYM8WmACvGTtFS7QJGL3wU346VVs6ReI"
-},
-{
-"studentName": "SAKARIYA HET MAHESHBHAI",
-"University": "SUxCG 702",
-"UniversityUID": "108547",
-"imageUrl": "https://ibb.co/jZssK4MP"
-},
-{
-"studentName": "SAPTAK BHATTACHARYYA",
-"University": "SUxCG 714",
-"UniversityUID": "108267",
-"imageUrl": "https://res.cloudinary.com/dcmio3bme/image/upload/v1770273020/profilepic_sgv3xd.jpg"
-},
-{
-"studentName": "SARTHAK KHALASI",
-"University": "SUxCG 702",
-"UniversityUID": "108681"
-},
-{
-"studentName": "SHAHU RAUNAK RAMKHELAVAN",
-"University": "SUxCG 714",
-"UniversityUID": "108650",
-"imageUrl": "https://res.cloudinary.com/dhbxrjpgc/image/upload/v1770177667/02_1_emjekc.jpg"
-},
-{
-"studentName": "SHEE ANSHU SWAPANKUMAR",
-"University": "SUxCG 702",
-"UniversityUID": "108578",
-"imageUrl": "https://avatars.githubusercontent.com/u/224968887?s=400&u=f39c36ca87b58660dcd1eaa6c213f527336100ea&v=4"
-},
-{
-"studentName": "SONI HARSHID JIGARKUMAR",
-"University": "SUxCG 702",
-"UniversityUID": "108647",
-"imageUrl": "https://res.cloudinary.com/dxvggspmi/image/upload/v1770272022/harshid_rdtyhe.jpg"
-},
-{
-"studentName": "SOUVIK BISWAS",
-"University": "SUxCG 714",
-"UniversityUID": "108694",
-"imageUrl": "https://res.cloudinary.com/dpcmc1rqn/image/upload/v1770289943/IMG_20251017_130943_701_lndbeh.webp"
-},
-{
-"studentName": "SUHAGIYA PARV KAMLESHBHAI",
-"University": "SUxCG 714",
-"UniversityUID": "108620",
-"imageUrl": "https://res.cloudinary.com/dbouvoh2b/image/upload/v1770272244/edited_profile_p5uqgv.jpg"
-},
-{
-"studentName": "SUMIT KUMAR",
-"University": "SUxCG 702",
-"UniversityUID": "108403",
-"imageUrl": "https://lh3.googleusercontent.com/gg/AMW1TPpZokcDvpmQCs78uf-503CnE81mlcz3S6bF5xDJm8Tpy8Xz7Wl6pCiekbxX0km2bHUoQNFEpP2HcZRR7GmTIh-zxBRHSS4bwA35KkJT6R6m3a2MNKIHEP5QR2ZJA3ksjjUS5bOeWNi3GOD3xvNCkg6JP9rk2g3VGkiQpsWLvd5FTIVBKhD9=s1024-rj-mp2"
-},
-{
-"studentName": "SUSHANT RAVI",
-"University": "SUxCG 702",
-"UniversityUID": "108619",
-"imageUrl": "https://res.cloudinary.com/dxe4mpopf/image/upload/v1770271838/WhatsApp_Image_2026-02-05_at_11.28.10_AM_hl6os7.png"
-},
-{
-"studentName": "SUTHAR ANANDKUMAR VAJARAM",
-"University": "SUxCG 714",
-"UniversityUID": "108539",
-"imageUrl": "https://res.cloudinary.com/dpvmzqfvv/image/upload/v1770271264/AnandIMG_-_Copy_mou9hb.jpg"
-},
-{
-"studentName": "SWARAJ PRAJAPATI",
-"University": "SUxCG 714",
-"UniversityUID": "108710",
-"imageUrl": "https://res.cloudinary.com/dmgd696hu/image/upload/v1770272157/WhatsApp_Image_2026-02-05_at_11.41.27_AM_emmkyx.jpg"
-},
-{
-"studentName": "Shah Arpan Pratikkumar",
-"University": "SUxCG 702",
-"UniversityUID": "109207",
-"imageUrl": "https://avatars.githubusercontent.com/u/225791753?v=4"
-},
-{
-"studentName": "TAJAPARA DHRUVABEN SANJAYKUMAR",
-"University": "SUxCG 714",
-"UniversityUID": "108568",
-"imageUrl": "https://res.cloudinary.com/dojjfvya3/image/upload/v1770271405/WhatsApp_Image_2026-01-26_at_9.20.47_PM_rf00r5.jpg"
-},
-{
-"studentName": "TALAVIYA BHAVY KALPESHBHAI",
-"University": "SUxCG 702",
-"UniversityUID": "108897",
-"imageUrl": "https://media.licdn.com/dms/image/v2/D5603AQFdJwoyGsSqNA/profile-displayphoto-crop_800_800/B56Zv7LN2tIcAI-/0/1769445582904?e=1772064000&v=beta&t=IHgaJrje4b3YmnzdpcMNvX4bEMTUMtyyE7aSiRLAW58"
-},
-{
-"studentName": "UTKARSH KUMAR SINGH",
-"University": "SUxCG 702",
-"UniversityUID": "108359",
-"imageUrl": "https://image2url.com/r2/default/images/1770271292410-064c7656-e54a-42fc-b24a-1193530674b3.png"
-},
-{
-"studentName": "VACHHANI TAPAN NILESHBHAI",
-"University": "SUxCG 714",
-"UniversityUID": "108655",
-"imageUrl": "https://res.cloudinary.com/dgcmeb8ec/image/upload/v1770272059/WhatsApp_Image_2026-02-05_at_11.38.22_AM_n5lihd.jpg"
-},
-{
-"studentName": "VADIYA DEVANSHI JAGDISHKUMAR",
-"University": "SUxCG 714",
-"UniversityUID": "108540",
-"imageUrl": "https://res.cloudinary.com/dagwbyz4e/image/upload/c_crop,w_800,h_800,ar_1:1,g_auto/v1770121307/devanshipic_ncx5h1.jpg"
-},
-{
-"studentName": "VALIYA JAYDIP RAJUBHAI",
-"University": "SUxCG 702",
-"UniversityUID": "108549",
-"imageUrl": "https://media.licdn.com/dms/image/v2/D5603AQHoiLa4muT6lA/profile-displayphoto-scale_400_400/B56ZsvnO9PJwAg-/0/1766030373238?e=1771459200&v=beta&t=__VdGXmF4NhwT82jnmzQca-X2vAqEiNYYyfxt3Lc7J4"
-},
-{
-"studentName": "VIDHI ASHISHBHAI MANDALIYA",
-"University": "SUxCG 702",
-"UniversityUID": "108361",
-"imageUrl": "https://avatars.githubusercontent.com/u/224968546?s=400&u=460eddd5d824feaf240416a1f1c9c10710e2aced&v=4"
-},
-{
-"studentName": "VIJAY DIWANIYA",
-"University": "SUxCG 702",
-"UniversityUID": "108513"
-},
-{
-"studentName": "ZEEL MANISHBHAI KUNDARIYA",
-"University": "SUxCG 714",
-"UniversityUID": "108707",
-"imageUrl": "https://res.cloudinary.com/dfixglmya/image/upload/v1770272514/Zeel_codinggita_profile_gzbq1y.jpg"
-}
+    {
+        "studentName": "ABDUL HAQUE",
+        "University": "SUxCG 714",
+        "UniversityUID": "108444",
+        "imageUrl": "https://res.cloudinary.com/dv3jsenpu/image/upload/v1770111942/abdul_b3x8f9.jpg"
+    },
+    {
+        "studentName": "ADITYA KUMAR",
+        "University": "SUxCG 702",
+        "UniversityUID": "108716",
+        "imageUrl": "https://i.postimg.cc/rwV7WKwH/Gemini-Generated-Image-s9u3a3s9u3a3s9u3.png"
+    },
+    {
+        "studentName": "AMAN KUMAR",
+        "University": "SUxCG 702",
+        "UniversityUID": "108500",
+        "imageUrl": "https://avatars.githubusercontent.com/u/224962508?v=4"
+    },
+    {
+        "studentName": "AMRIT RAJ",
+        "University": "SUxCG 702",
+        "UniversityUID": "108587",
+        "imageUrl": "https://image2url.com/r2/default/images/1770271471501-1b33e5a4-f0e2-44ae-95fd-1f8f9b5090a2.jpeg"
+    },
+    {
+        "studentName": "ANISHA CHHAJER",
+        "University": "SUxCG 714",
+        "UniversityUID": "108565",
+        "imageUrl": "https://res.cloudinary.com/dq7hb3fah/image/upload/v1770271187/Screenshot_2026-02-03_162035_auymxx.png"
+    },
+    {
+        "studentName": "ANKIT KUMAR Patna",
+        "University": "SUxCG 714",
+        "UniversityUID": "108706",
+        "imageUrl": "https://res.cloudinary.com/dxwlm3gex/image/upload/v1770271858/Screenshot_2025-08-02_100957_uzmadj.png"
+    },
+    {
+        "studentName": "ATUL KUMAR SINGH",
+        "University": "SUxCG 714",
+        "UniversityUID": "108589",
+        "imageUrl": "https://res.cloudinary.com/dv5jwhu5t/image/upload/v1770112010/WhatsApp_Image_2026-02-03_at_3_15_07_PM-Picsart-AiImageEnhancer_mj3yoq.jpg"
+    },
+    {
+        "studentName": "BACHHAV PRITESH VIKRAM",
+        "University": "SUxCG 714",
+        "UniversityUID": "108654",
+        "imageUrl": "https://res.cloudinary.com/dzmso2ukz/image/upload/v1767710904/prit_v53ufo.jpg"
+    },
+    {
+        "studentName": "BAJANIYA DAKSH VIJAYKUMAR",
+        "University": "SUxCG 714",
+        "UniversityUID": "108653",
+        "imageUrl": "https://media.licdn.com/dms/image/v2/D4E03AQF2lRi3Zn-jRQ/profile-displayphoto-scale_200_200/B4EZuruJVDGYAY-/0/1768112562045?e=1772064000&v=beta&t=NmeMYgYmAJm7jf9ec0EiTG3Fvtf_9qa3-jymDsLMtN0"
+    },
+    {
+        "studentName": "CHAUDHARI SAHIL VINUBHAI",
+        "University": "SUxCG 702",
+        "UniversityUID": "108709",
+        "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-03-549e0f23-0fd9-45e3-b92c-5d5d70130d0e.jpg"
+    },
+    {
+        "studentName": "CHIRAG PRAJAPAT",
+        "University": "SUxCG 702",
+        "UniversityUID": "108302",
+        "imageUrl": "https://image2url.com/r2/default/images/1770271230017-d4cd0054-3b63-42e8-8aea-00a26e19dbe2.jpeg"
+    },
+    {
+        "studentName": "DANGAR SHREYANSH DHARMESHBHAI",
+        "University": "SUxCG 702",
+        "UniversityUID": "108929",
+        "imageUrl": "https://ibb.co/Z6yDqq0r"
+    },
+    {
+        "studentName": "DASHRAT SINGH RAJPUROHIT",
+        "University": "SUxCG 714",
+        "UniversityUID": "108682",
+        "imageUrl": "https://res.cloudinary.com/dyp6zbyjd/image/upload/v1770119085/WhatsApp_Image_2025-11-16_at_10.40.09_b162367d_pkwxej.jpg"
+    },
+    {
+        "studentName": "DEEPAK KUMAR",
+        "University": "SUxCG 714",
+        "UniversityUID": "108429",
+        "imageUrl": "https://res.cloudinary.com/dzeyeqk8e/image/upload/v1770278663/WhatsApp_Image_2026-02-05_at_1.02.55_PM_hv1ojy.jpg"
+    },
+    {
+        "studentName": "DEVASI TRIKAM MANGILAL",
+        "University": "SUxCG 714",
+        "UniversityUID": "108541",
+        "imageUrl": "https://aggregate-silver-ykhnbggbyn.edgeone.app/WhatsApp%20Image%202026-02-03%20at%2016.04.55.jpeg"
+    },
+    {
+        "studentName": "DHRUV OZHA",
+        "University": "SUxCG 702",
+        "UniversityUID": "108624",
+        "imageUrl": "https://i.postimg.cc/mrnzYWZG/1000029830.png"
+    },
+    {
+        "studentName": "DHRUVIBEN PATEL",
+        "University": "SUxCG 714",
+        "UniversityUID": "109110",
+        "imageUrl": "https://res.cloudinary.com/db3htfvvx/image/upload/v1770271445/Screenshot_2026-02-03_162558_lzas7c.png"
+    },
+    {
+        "studentName": "DHVANIT ASHISHBHAI KANABAR",
+        "University": "SUxCG 714",
+        "UniversityUID": "108616",
+        "imageUrl": "https://res.cloudinary.com/dr84lv5ym/image/upload/v1770316607/WhatsApp_Image_2026-02-05_at_11.47.36_PM_1_1_hyhp5f.jpg"
+    },
+    {
+        "studentName": "DOSHI NISHIT GAURANG",
+        "University": "SUxCG 714",
+        "UniversityUID": "108622",
+        "imageUrl": "https://res.cloudinary.com/df1pm6a4x/image/upload/v1770178210/Screenshot_2026-02-04_093956_tpwfrp.png"
+    },
+    {
+        "studentName": "DUBAL VEDANT PARESHBHAI",
+        "University": "SUxCG 702",
+        "UniversityUID": "108687"
+    },
+    {
+        "studentName": "Dev Daxitkumar patel",
+        "University": "SUxCG 714",
+        "UniversityUID": "108581",
+        "imageUrl": "https://res.cloudinary.com/dre3wdpfu/image/upload/v1770271488/Photograph_qykuyy.png"
+    },
+    {
+        "studentName": "GABALE RITESH RUPESH",
+        "University": "SUxCG 714",
+        "UniversityUID": "108476",
+        "imageUrl": "https://media.licdn.com/dms/image/v2/D4E03AQH4P-pf8sMpog/profile-displayphoto-scale_200_200/B4EZtVk0ZUJQAY-/0/1766667274513?e=1771459200&v=beta&t=O_k6JhL5aQCQYsMG17_TM6XYYpyAWVLg1LJU8HQq518"
+    },
+    {
+        "studentName": "GHORI KAHAN NARESHBHAI",
+        "University": "SUxCG 714",
+        "UniversityUID": "108686",
+        "imageUrl": "https://media.licdn.com/dms/image/v2/D5603AQG31FvqfMYNYw/profile-displayphoto-scale_400_400/B56Zs6DtuUJsAg-/0/1766205612278?e=1772064000&v=beta&t=gfEUfAuq3Llqw_aFk6zKVDtmNmlP0FghdsXu9ed1JL0"
+    },
+    {
+        "studentName": "HANUMAN SINGH",
+        "University": "SUxCG 714",
+        "UniversityUID": "108711",
+        "imageUrl": "https://cdn.phototourl.com/uploads/2026-02-03-62b0af0a-2dd6-412e-8139-0c08f25f1fb5.jpg"
+    },
+    {
+        "studentName": "HARSHIT KUMAR",
+        "University": "SUxCG 714",
+        "UniversityUID": "108685",
+        "imageUrl": "https://res.cloudinary.com/difsagudo/image/upload/v1770118404/linkedin_aggam8.png"
+    },
+    {
+        "studentName": "HEMANG SINGH SOLANKI",
+        "University": "SUxCG 714",
+        "UniversityUID": "108751",
+        "imageUrl": "https://image2url.com/images/1764515720697-f4d7da8f-9425-4dec-8d37-26fe3112f1bc.jpeg"
+    },
+    {
+        "studentName": "HETAVI MAHENDRA PANCHOTIA",
+        "University": "SUxCG 714",
+        "UniversityUID": "108563",
+        "imageUrl": "https://drive.google.com/file/d/1BnAQ4KCkv3Qz-PAC8PdhxpOcOYMl-yI5/view"
+    },
+    {
+        "studentName": "HIRPARA CHITT HITESHKUMAR",
+        "University": "SUxCG 714",
+        "UniversityUID": "108552",
+        "imageUrl": "https://image2url.com/r2/bucket1/images/1766558182628-32abc985-d1c6-4e5f-886a-90cbb66f3941.jpeg"
+    },
+    {
+        "studentName": "JAIN TULYA BINESH",
+        "University": "SUxCG 702",
+        "UniversityUID": "108584",
+        "imageUrl": "https://res.cloudinary.com/dvlbmmboc/image/upload/v1770112544/profile-pic_y5385j.png"
+    },
+    {
+        "studentName": "JANI MANAN BHAVESHBHAI",
+        "University": "SUxCG 702",
+        "UniversityUID": "108649",
+        "imageUrl": "https://avatars.githubusercontent.com/u/225340993?s=400&u=02e006d1a75a1b99af23beaa57d34a032fba972a&v=4"
+    },
+    {
+        "studentName": "JANJIRALA SAIPRASAN RAMESHBHAI",
+        "University": "SUxCG 702",
+        "UniversityUID": "108398",
+        "imageUrl": "https://avatars.githubusercontent.com/u/224969012?v=4"
+    },
+    {
+        "studentName": "KAKKAD RACHIT HIREN",
+        "University": "SUxCG 714",
+        "UniversityUID": "108715",
+        "imageUrl": "https://res.cloudinary.com/dr84lv5ym/image/upload/v1766822886/Gemini_Generated_Image_frr4u1frr4u1frr4_satzu8.png"
+    },
+    {
+        "studentName": "KAMLESH BHIMABHAI CHANDELA",
+        "University": "SUxCG 714",
+        "UniversityUID": "108360",
+        "imageUrl": "https://res.cloudinary.com/dsuhb6swy/image/upload/v1767764610/Screenshot_2026-01-07_111318_cpzfzv.png"
+    },
+    {
+        "studentName": "KANANI YASHVI MAULIKBHAI",
+        "University": "SUxCG 714",
+        "UniversityUID": "108571",
+        "imageUrl": "https://drive.google.com/file/d/1wyYwdWMhSe-3tFM7b_xyR66h9W-hk51A/view?usp=sharing"
+    },
+    {
+        "studentName": "KARETIYA PARTH SANJAYBHAI",
+        "University": "SUxCG 702",
+        "UniversityUID": "108740",
+        "imageUrl": "https://i.postimg.cc/qqTVtwFw/Untitled-design-(1).png"
+    },
+    {
+        "studentName": "KAVATHIYA HARSH PARULBHAI",
+        "University": "SUxCG 702",
+        "UniversityUID": "108538"
+    },
+    {
+        "studentName": "KRISHNA SOLANKI",
+        "University": "SUxCG 702",
+        "UniversityUID": "108797",
+        "imageUrl": "https://smart-apricot-ridtgwx5hj.edgeone.app/MYPHOTO.jpeg"
+    },
+    {
+        "studentName": "KSHITIJ PANDEY",
+        "University": "SUxCG 702",
+        "UniversityUID": "108798"
+    },
+    {
+        "studentName": "KULDEEP PATEL",
+        "University": "SUxCG 702",
+        "UniversityUID": "107962"
+    },
+    {
+        "studentName": "Khatri Smit Manoj",
+        "University": "SUxCG 702",
+        "UniversityUID": "109236"
+    },
+    {
+        "studentName": "LUMBHANI MAYANKBHAI BHAVESHBHAI",
+        "University": "SUxCG 702",
+        "UniversityUID": "108618",
+        "imageUrl": "https://media.licdn.com/dms/image/v2/D4E03AQGUt3DBEn0CGQ/profile-displayphoto-crop_800_800/B4EZs8P4SVGkAI-/0/1766242355751?e=1771459200&v=beta&t=Hex0qdazX0mV60NdZIxSHYmKozgPDXGDZ5-3bqz4zBY"
+    },
+    {
+        "studentName": "MANN PATEL",
+        "University": "SUxCG 714",
+        "UniversityUID": "108585"
+    },
+    {
+        "studentName": "MANSURI JILAN FARIDBHAI",
+        "University": "SUxCG 714",
+        "UniversityUID": "108623",
+        "imageUrl": "https://res.cloudinary.com/doxsyif22/image/upload/v1770271427/WhatsApp_Image_2026-02-05_at_11.30.41_AM_sa4yes.jpg"
+    },
+    {
+        "studentName": "MEMAN MOHAMMAD AMMAR ASIF",
+        "University": "SUxCG 702",
+        "UniversityUID": "108726",
+        "imageUrl": "https://image2url.com/r2/default/images/1770114968022-4f2f9faa-93eb-4b67-b8b1-3684e280ec48.jpg"
+    },
+    {
+        "studentName": "MUNDHE HIMMAT HANUMAN",
+        "University": "SUxCG 714",
+        "UniversityUID": "108800",
+        "imageUrl": "https://res.cloudinary.com/dhsswexri/image/upload/v1770315826/me_While_qx1sti.jpg"
+    },
+    {
+        "studentName": "NAYAKPARA PRINCE VIJAYBHAI",
+        "University": "SUxCG 714",
+        "UniversityUID": "108692",
+        "imageUrl": "https://res.cloudinary.com/dhpmqm013/image/upload/v1770192469/WhatsApp_Image_2026-02-04_at_13.32.32_qhscx9.jpg"
+    },
+    {
+        "studentName": "NIKHIL RAJ",
+        "University": "SUxCG 702",
+        "UniversityUID": "108459",
+        "imageUrl": "https://res-console.cloudinary.com/dkiez6yqc/thumbnails/v1/image/upload/v1770272960/TmlraGlsX3NmZndidg==/drilldown"
+    },
+    {
+        "studentName": "NITISH KUMAR",
+        "University": "SUxCG 714",
+        "UniversityUID": "108795",
+        "imageUrl": "https://res.cloudinary.com/dbknqb3e7/image/upload/v1770271685/1767853370488_uclzab.jpg"
+    },
+    {
+        "studentName": "Neev Patel",
+        "University": "SUxCG 702",
+        "UniversityUID": "107359",
+        "imageUrl": "https://res.cloudinary.com/dmqkfsaca/image/upload/v1770118415/WhatsApp_Image_2026-02-03_at_4.58.15_PM_hz56z1.jpg"
+    },
+    {
+        "studentName": "PALAN JALAK ANANDKUMAR",
+        "University": "SUxCG 702",
+        "UniversityUID": "108714",
+        "imageUrl": "https://avatars.githubusercontent.com/u/225344229?s=400&u=1af066e4f63fcc60a45853ccebe1ba065ed77cc5&v=4"
+    },
+    {
+        "studentName": "PANCHAL KREYABEN BHAVESHBHAI",
+        "University": "SUxCG 702",
+        "UniversityUID": "108569",
+        "imageUrl": "https://drive.google.com/file/d/1k8S5FyjMVYQIJx8SEZtcU8RjdfRvAHxU/view?usp=drive_link"
+    },
+    {
+        "studentName": "PANDYA HARSHIT RAHULBHAI",
+        "University": "SUxCG 714",
+        "UniversityUID": "108660",
+        "imageUrl": "https://ik.imagekit.io/29112007/IMG_20250907_132229-comprassed.jpg"
+    },
+    {
+        "studentName": "PARAKHIYA RUTVI SUNILBHAI",
+        "University": "SUxCG 702",
+        "UniversityUID": "108545",
+        "imageUrl": "https://avatars.githubusercontent.com/u/224969532?s=400&u=7102edface3255b9f5a30cfa38d88f661298ee75&v=4"
+    },
+    {
+        "studentName": "PATEL ANSH HIRENBHAI",
+        "University": "SUxCG 714",
+        "UniversityUID": "108617",
+        "imageUrl": "https://ansh-photo.edgeone.app/ANSH%20PHOTO.png"
+    },
+    {
+        "studentName": "PATEL ANSH MAHESHKUMAR",
+        "University": "SUxCG 702",
+        "UniversityUID": "108579"
+    },
+    {
+        "studentName": "PATEL DHARMIBAHEN MAHESHKUMAR",
+        "University": "SUxCG 702",
+        "UniversityUID": "108691",
+        "imageUrl": "https://avatars.githubusercontent.com/u/226024353?s=400&u=a00f614c34151e92696e3668921826a3c91f1b83&v=4"
+    },
+    {
+        "studentName": "PATEL DHYEYKUMAR JATIN",
+        "University": "SUxCG 702",
+        "UniversityUID": "108583"
+    },
+    {
+        "studentName": "PATEL DRUP PRAVINBHAI",
+        "University": "SUxCG 702",
+        "UniversityUID": "108546",
+        "imageUrl": "https://wandering-azure-ll3hcmpsht.edgeone.app/2d13ef56-01a3-4e16-aadc-7ea9fb9dff96.png"
+    },
+    {
+        "studentName": "PATEL HARSHIL HITENDRAKUMAR",
+        "University": "SUxCG 714",
+        "UniversityUID": "108543",
+        "imageUrl": "https://icy-teal-ylwx7c4jy1.edgeone.app/h.jpeg"
+    },
+    {
+        "studentName": "PATEL JAL HITESHKUMAR",
+        "University": "SUxCG 702",
+        "UniversityUID": "108648",
+        "imageUrl": "https://resulting-crimson-3oxdxpjfbv.edgeone.app/0ef752c9-3f5d-491e-9bce-6db35dfaf363.jpg"
+    },
+    {
+        "studentName": "PATEL JAY AMITBHAI",
+        "University": "SUxCG 714",
+        "UniversityUID": "108725",
+        "imageUrl": "https://rubber-gold-91bco2ahm3.edgeone.app/ChatGPT%20Image%20Jan%201,%202026,%2002_17_48%20PM.png"
+    },
+    {
+        "studentName": "PATEL JIVAN PARSHOTAM",
+        "University": "SUxCG 714",
+        "UniversityUID": "108796",
+        "imageUrl": "https://res.cloudinary.com/dkohpqbdj/image/upload/v1770271335/profile_nbhijj.jpg"
+    },
+    {
+        "studentName": "PATEL KHUSH PANKAJKUMAR",
+        "University": "SUxCG 702",
+        "UniversityUID": "108645",
+        "imageUrl": "https://lh3.googleusercontent.com/gg/AMW1TPo7j50cQaa1ibfZZv3VZuoVUK5Hi6i9_rWxK72n8H5s69hyhNjLVhzuL-_00_V6VsRl_mujIrc7JZiPHjRTPRMl_v49-V81jYytAaBAOqu8QSfoyMStFX4u1ZNRyBQuigP2I9gAalsIRjdEYjYtKH929H1OAXpM4U3N-AahOAvVVegxL0M=s1024-rj-mp2"
+    },
+    {
+        "studentName": "PATEL MAHARSHI JIGNESHKUMAR",
+        "University": "SUxCG 714",
+        "UniversityUID": "108688",
+        "imageUrl": "https://res.cloudinary.com/dxgcm4xth/image/upload/v1770271848/ChatGPT_Image_Dec_24_2025_10_09_58_PM_optimized_950_iuqmde.png"
+    },
+    {
+        "studentName": "PATEL MANANKUMAR NILESHKUMAR",
+        "University": "SUxCG 714",
+        "UniversityUID": "108659",
+        "imageUrl": "https://res.cloudinary.com/dxzo7jfbn/image/upload/v1770271139/photo1_nsxmyy.jpg"
+    },
+    {
+        "studentName": "PATEL PRIYANSH NAYANKUMAR",
+        "University": "SUxCG 714",
+        "UniversityUID": "108658",
+        "imageUrl": "https://expected-blue-55b2kmvgyh.edgeone.app/pri%20pic.jpeg"
+    },
+    {
+        "studentName": "PATEL PURNANSH KETANKUMAR",
+        "University": "SUxCG 702",
+        "UniversityUID": "108553",
+        "imageUrl": "https://res.cloudinary.com/djo9apq7q/image/upload/v1770271427/WhatsApp_Image_2025-11-07_at_09.49.36_a0aa010e_bs2qdl.jpg"
+    },
+    {
+        "studentName": "PATEL RANI RAKESHKUMAR",
+        "University": "SUxCG 714",
+        "UniversityUID": "108087",
+        "imageUrl": "https://res.cloudinary.com/dpktusyjs/image/upload/v1770283801/Screenshot_2026-02-05_145749_w7yo2b.png"
+    },
+    {
+        "studentName": "PATEL VEDANTKUMAR CHETANBHAI",
+        "University": "SUxCG 702",
+        "UniversityUID": "108708",
+        "imageUrl": "https://res.cloudinary.com/dv7bazp5k/image/upload/v1770271141/portfoliophoto_chnbyp.jpg"
+    },
+    {
+        "studentName": "PATEL VISHV VILISH",
+        "University": "SUxCG 714",
+        "UniversityUID": "108801",
+        "imageUrl": "https://res.cloudinary.com/drj44l5df/image/upload/v1770118953/p_de8zf6.jpg"
+    },
+    {
+        "studentName": "PATEL VISHWA BHAVESHKUMAR",
+        "University": "SUxCG 702",
+        "UniversityUID": "109046",
+        "imageUrl": "https://avatars.githubusercontent.com/u/225901469?v=4"
+    },
+    {
+        "studentName": "PATEL VISHWA JAYESHKUMAR",
+        "University": "SUxCG 702",
+        "UniversityUID": "108615",
+        "imageUrl": "https://avatars.githubusercontent.com/u/224971540?v=4"
+    },
+    {
+        "studentName": "PRAJAPATI KRISHNA RAJESHKUMAR",
+        "University": "SUxCG 702",
+        "UniversityUID": "108582",
+        "imageUrl": "https://i.postimg.cc/50JwZSMm/professional-edit.jpg"
+    },
+    {
+        "studentName": "PRAJAPATI NANDINIBEN BHARATBHAI",
+        "University": "SUxCG 714",
+        "UniversityUID": "108802",
+        "imageUrl": "https://drive.google.com/file/d/1lA0AOf7iWP70NZqD0fu-exfFVodY1ukY/view?usp=drivesdk"
+    },
+    {
+        "studentName": "PRAJAPATI VINEET BHAVESHKUMAR",
+        "University": "SUxCG 714",
+        "UniversityUID": "108695",
+        "imageUrl": "https://res.cloudinary.com/dyclllyqr/image/upload/v1770271294/picofme_1_xlprgh.png"
+    },
+    {
+        "studentName": "PRASHANT KENETH PARMAR",
+        "University": "SUxCG 714",
+        "UniversityUID": "108697",
+        "imageUrl": "https://res.cloudinary.com/dgib19szk/image/upload/v1767781842/WhatsApp_Image_2025-12-19_at_6.26.39_PM_sqhrst.jpg"
+    },
+    {
+        "studentName": "PRATHVIK MEHRA",
+        "University": "SUxCG 714",
+        "UniversityUID": "108758",
+        "imageUrl": "https://res.cloudinary.com/dgg85vi0a/image/upload/v1770112050/professional-photo_zbsnrz.jpg"
+    },
+    {
+        "studentName": "PRIYA",
+        "University": "SUxCG 714",
+        "UniversityUID": "108572",
+        "imageUrl": "https://drive.google.com/file/d/1h62swAcirg-fZpiqJJgc1dwfUAAETIqc/view?usp=sharing"
+    },
+    {
+        "studentName": "PRIYANK KHATRI",
+        "University": "SUxCG 702",
+        "UniversityUID": "108693",
+        "imageUrl": "https://res.cloudinary.com/dox5vwbyk/image/upload/v1757997275/IMG_20250907_182156_130_spug5p.jpg"
+    },
+    {
+        "studentName": "RAJPUT DEVISINGH JAWANSINGH",
+        "University": "SUxCG 714",
+        "UniversityUID": "108757",
+        "imageUrl": "https://res.cloudinary.com/dewymrwzf/image/upload/v1770112889/Gemini_Generated_Image_uaglbwuaglbwuagl____2_l94gus.png"
+    },
+    {
+        "studentName": "RAKSHITRAJ YADAV",
+        "University": "SUxCG 714",
+        "UniversityUID": "108542",
+        "imageUrl": "https://res.cloudinary.com/dphtrtpjx/image/upload/v1770112466/Rakshit_Raj_EDITH_jgfyot.jpg"
+    },
+    {
+        "studentName": "RATHOD HET ASHVINKUMAR",
+        "University": "SUxCG 702",
+        "UniversityUID": "108652",
+        "imageUrl": "https://media.licdn.com/dms/image/v2/D4E03AQEd50GY_ptmqQ/profile-displayphoto-scale_200_200/B4EZsylrQmGoAY-/0/1766080298229?e=1772064000&v=beta&t=PHEypC9ZPvz1FIU-mNaiMctUxu7KWAzDVSXM6-RzQ1k"
+    },
+    {
+        "studentName": "RATHOD RISHIRAJSINH PUSHPENDRASINH",
+        "University": "SUxCG 714",
+        "UniversityUID": "108580",
+        "imageUrl": "https://avatars.githubusercontent.com/u/224968108?s=400&u=5f0d42cbbdc046d02efc8c21b6e8989ec24810cf&v=4"
+    },
+    {
+        "studentName": "RAUSHAN KUMAR",
+        "University": "SUxCG 702",
+        "UniversityUID": "108651"
+    },
+    {
+        "studentName": "RAVAL MUNJAL ASHISHKUMAR",
+        "University": "SUxCG 714",
+        "UniversityUID": "108854",
+        "imageUrl": "https://res.cloudinary.com/dpoa5mehq/image/upload/v1770271314/photo_xj0sms.jpg"
+    },
+    {
+        "studentName": "RISHAB RAVIKUMAR CHANDGOTHIA",
+        "University": "SUxCG 714",
+        "UniversityUID": "108713",
+        "imageUrl": "https://media.licdn.com/dms/image/v2/D4D03AQG1Zx7TEY3Z7g/profile-displayphoto-scale_400_400/B4DZwi8mXEIAAg-/0/1770112838452?e=1771459200&v=beta&t=mrBveHpXBITMF3QejevFlr4EB8gJYSywmUBjFC6Mnt4"
+    },
+    {
+        "studentName": "RISHIKESH SINGH",
+        "University": "SUxCG 714",
+        "UniversityUID": "108551",
+        "imageUrl": "https://res.cloudinary.com/dpkugdw9y/image/upload/v1770273125/lates_fniofe.jpg"
+    },
+    {
+        "studentName": "RITURAJ JHA",
+        "University": "SUxCG 702",
+        "UniversityUID": "108458",
+        "imageUrl": "https://res.cloudinary.com/dtqsbbz5r/image/upload/v1770273294/temp_image_jybjzq.png"
+    },
+    {
+        "studentName": "RONIT KUMAR SONI",
+        "University": "SUxCG 702",
+        "UniversityUID": "108428"
+    },
+    {
+        "studentName": "ROY HET JAYESHKUMAR",
+        "University": "SUxCG 702",
+        "UniversityUID": "108644",
+        "imageUrl": "https://i.postimg.cc/kMZ0K2Nt/Whats-App-Image-2026-02-05-at-11-29-35-AM.jpg"
+    },
+    {
+        "studentName": "SABASANA ARYAN NAREDRAKUMAR",
+        "University": "SUxCG 714",
+        "UniversityUID": "108690",
+        "imageUrl": "https://avatars.githubusercontent.com/u/226010537?s=400&u=5b8460e62a352fd014b17faa3558a6ab1ea5027c&v=4"
+    },
+    {
+        "studentName": "SACHIN PATEL",
+        "University": "SUxCG 702",
+        "UniversityUID": "108890",
+        "imageUrl": "https://i.postimg.cc/8CFVj8xM/whatsapp-1234r.jpg"
+    },
+    {
+        "studentName": "SAHOO PRIYABRATA VIRENDRABHAI",
+        "University": "SUxCG 714",
+        "UniversityUID": "108799",
+        "imageUrl": "https://media.licdn.com/dms/image/v2/D5603AQHKrPFcmqaUTw/profile-displayphoto-crop_800_800/B56ZtforQCJIAM-/0/1766836057802?e=1772064000&v=beta&t=T9B0FRXRW7wFYM8WmACvGTtFS7QJGL3wU346VVs6ReI"
+    },
+    {
+        "studentName": "SAKARIYA HET MAHESHBHAI",
+        "University": "SUxCG 702",
+        "UniversityUID": "108547",
+        "imageUrl": "https://ibb.co/jZssK4MP"
+    },
+    {
+        "studentName": "SAPTAK BHATTACHARYYA",
+        "University": "SUxCG 714",
+        "UniversityUID": "108267",
+        "imageUrl": "https://res.cloudinary.com/dcmio3bme/image/upload/v1770273020/profilepic_sgv3xd.jpg"
+    },
+    {
+        "studentName": "SARTHAK KHALASI",
+        "University": "SUxCG 702",
+        "UniversityUID": "108681"
+    },
+    {
+        "studentName": "SHAHU RAUNAK RAMKHELAVAN",
+        "University": "SUxCG 714",
+        "UniversityUID": "108650",
+        "imageUrl": "https://res.cloudinary.com/dhbxrjpgc/image/upload/v1770177667/02_1_emjekc.jpg"
+    },
+    {
+        "studentName": "SHEE ANSHU SWAPANKUMAR",
+        "University": "SUxCG 702",
+        "UniversityUID": "108578",
+        "imageUrl": "https://avatars.githubusercontent.com/u/224968887?s=400&u=f39c36ca87b58660dcd1eaa6c213f527336100ea&v=4"
+    },
+    {
+        "studentName": "SONI HARSHID JIGARKUMAR",
+        "University": "SUxCG 702",
+        "UniversityUID": "108647",
+        "imageUrl": "https://res.cloudinary.com/dxvggspmi/image/upload/v1770272022/harshid_rdtyhe.jpg"
+    },
+    {
+        "studentName": "SOUVIK BISWAS",
+        "University": "SUxCG 714",
+        "UniversityUID": "108694",
+        "imageUrl": "https://res.cloudinary.com/dpcmc1rqn/image/upload/v1770289943/IMG_20251017_130943_701_lndbeh.webp"
+    },
+    {
+        "studentName": "SUHAGIYA PARV KAMLESHBHAI",
+        "University": "SUxCG 714",
+        "UniversityUID": "108620",
+        "imageUrl": "https://res.cloudinary.com/dbouvoh2b/image/upload/v1770272244/edited_profile_p5uqgv.jpg"
+    },
+    {
+        "studentName": "SUMIT KUMAR",
+        "University": "SUxCG 702",
+        "UniversityUID": "108403",
+        "imageUrl": "https://lh3.googleusercontent.com/gg/AMW1TPpZokcDvpmQCs78uf-503CnE81mlcz3S6bF5xDJm8Tpy8Xz7Wl6pCiekbxX0km2bHUoQNFEpP2HcZRR7GmTIh-zxBRHSS4bwA35KkJT6R6m3a2MNKIHEP5QR2ZJA3ksjjUS5bOeWNi3GOD3xvNCkg6JP9rk2g3VGkiQpsWLvd5FTIVBKhD9=s1024-rj-mp2"
+    },
+    {
+        "studentName": "SUSHANT RAVI",
+        "University": "SUxCG 702",
+        "UniversityUID": "108619",
+        "imageUrl": "https://res.cloudinary.com/dxe4mpopf/image/upload/v1770271838/WhatsApp_Image_2026-02-05_at_11.28.10_AM_hl6os7.png"
+    },
+    {
+        "studentName": "SUTHAR ANANDKUMAR VAJARAM",
+        "University": "SUxCG 714",
+        "UniversityUID": "108539",
+        "imageUrl": "https://res.cloudinary.com/dpvmzqfvv/image/upload/v1770271264/AnandIMG_-_Copy_mou9hb.jpg"
+    },
+    {
+        "studentName": "SWARAJ PRAJAPATI",
+        "University": "SUxCG 714",
+        "UniversityUID": "108710",
+        "imageUrl": "https://res.cloudinary.com/dmgd696hu/image/upload/v1770272157/WhatsApp_Image_2026-02-05_at_11.41.27_AM_emmkyx.jpg"
+    },
+    {
+        "studentName": "Shah Arpan Pratikkumar",
+        "University": "SUxCG 702",
+        "UniversityUID": "109207",
+        "imageUrl": "https://avatars.githubusercontent.com/u/225791753?v=4"
+    },
+    {
+        "studentName": "TAJAPARA DHRUVABEN SANJAYKUMAR",
+        "University": "SUxCG 714",
+        "UniversityUID": "108568",
+        "imageUrl": "https://res.cloudinary.com/dojjfvya3/image/upload/v1770271405/WhatsApp_Image_2026-01-26_at_9.20.47_PM_rf00r5.jpg"
+    },
+    {
+        "studentName": "TALAVIYA BHAVY KALPESHBHAI",
+        "University": "SUxCG 702",
+        "UniversityUID": "108897",
+        "imageUrl": "https://media.licdn.com/dms/image/v2/D5603AQFdJwoyGsSqNA/profile-displayphoto-crop_800_800/B56Zv7LN2tIcAI-/0/1769445582904?e=1772064000&v=beta&t=IHgaJrje4b3YmnzdpcMNvX4bEMTUMtyyE7aSiRLAW58"
+    },
+    {
+        "studentName": "UTKARSH KUMAR SINGH",
+        "University": "SUxCG 702",
+        "UniversityUID": "108359",
+        "imageUrl": "https://image2url.com/r2/default/images/1770271292410-064c7656-e54a-42fc-b24a-1193530674b3.png"
+    },
+    {
+        "studentName": "VACHHANI TAPAN NILESHBHAI",
+        "University": "SUxCG 714",
+        "UniversityUID": "108655",
+        "imageUrl": "https://res.cloudinary.com/dgcmeb8ec/image/upload/v1770272059/WhatsApp_Image_2026-02-05_at_11.38.22_AM_n5lihd.jpg"
+    },
+    {
+        "studentName": "VALIYA JAYDIP RAJUBHAI",
+        "University": "SUxCG 702",
+        "UniversityUID": "108549",
+        "imageUrl": "https://media.licdn.com/dms/image/v2/D5603AQHoiLa4muT6lA/profile-displayphoto-scale_400_400/B56ZsvnO9PJwAg-/0/1766030373238?e=1771459200&v=beta&t=__VdGXmF4NhwT82jnmzQca-X2vAqEiNYYyfxt3Lc7J4"
+    },
+    {
+        "studentName": "VIDHI ASHISHBHAI MANDALIYA",
+        "University": "SUxCG 702",
+        "UniversityUID": "108361",
+        "imageUrl": "https://avatars.githubusercontent.com/u/224968546?s=400&u=460eddd5d824feaf240416a1f1c9c10710e2aced&v=4"
+    },
+    {
+        "studentName": "VIJAY DIWANIYA",
+        "University": "SUxCG 702",
+        "UniversityUID": "108513"
+    },
+    {
+        "studentName": "ZEEL MANISHBHAI KUNDARIYA",
+        "University": "SUxCG 714",
+        "UniversityUID": "108707",
+        "imageUrl": "https://res.cloudinary.com/dfixglmya/image/upload/v1770272514/Zeel_codinggita_profile_gzbq1y.jpg"
+    }
 ]

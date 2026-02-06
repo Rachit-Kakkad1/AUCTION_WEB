@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/sheet';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
+import { StudentSearch } from './StudentSearch';
 
 /**
  * Header — CodingGita Auction Institutional Header
@@ -81,7 +82,6 @@ export function Header({ auctionActive }: HeaderProps) {
               </h1>
               <p
                 className="hidden sm:block text-xs text-white/40 font-medium tracking-wide uppercase select-none cursor-default"
-                onDoubleClick={() => navigate('/controller')}
               >
                 Official Auction Arena
               </p>
@@ -92,15 +92,18 @@ export function Header({ auctionActive }: HeaderProps) {
           <div className="flex items-center gap-4">
             {/* Status indicator — subtle, not attention-grabbing */}
             {auctionActive && (
-              <div className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded border border-white/10">
-                <div
-                  className="w-2 h-2 rounded-full"
-                  style={{ backgroundColor: GOLD }}
-                />
-                <span className="text-xs font-medium text-white/60 uppercase tracking-wider">
-                  Live
-                </span>
-              </div>
+              <>
+                <StudentSearch />
+                <div className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded border border-white/10">
+                  <div
+                    className="w-2 h-2 rounded-full"
+                    style={{ backgroundColor: GOLD }}
+                  />
+                  <span className="text-xs font-medium text-white/60 uppercase tracking-wider">
+                    Live
+                  </span>
+                </div>
+              </>
             )}
 
             {/* HAMBURGER MENU */}
@@ -110,7 +113,7 @@ export function Header({ auctionActive }: HeaderProps) {
                   <Menu className="w-6 h-6" />
                 </Button>
               </SheetTrigger>
-              <SheetContent className="w-[400px] border-l border-white/10 bg-[#0a0a0f] text-white p-0 flex flex-col">
+              <SheetContent className="w-full sm:w-[400px] border-l border-white/10 bg-[#0a0a0f] text-white p-0 flex flex-col">
                 <SheetHeader className="p-6 border-b border-white/10">
                   <SheetTitle className="text-xl font-bold flex items-center gap-3 uppercase tracking-wider" style={{ color: GOLD }}>
                     <Menu className="w-5 h-5" />
@@ -123,7 +126,7 @@ export function Header({ auctionActive }: HeaderProps) {
 
                 {/* SCROLLABLE LEADERBOARD */}
                 <ScrollArea className="flex-1">
-                  <div className="p-6 space-y-4">
+                  <div className="pl-3 pr-10 py-4 space-y-3">
                     {soldStudents.length === 0 ? (
                       <div className="text-center py-12 text-white/20 flex flex-col items-center gap-2">
                         <Users className="w-12 h-12 opacity-20" />
@@ -137,11 +140,11 @@ export function Header({ auctionActive }: HeaderProps) {
                         return (
                           <div
                             key={student.id}
-                            className="flex items-center gap-4 p-3 rounded-lg border border-white/5 bg-white/5 hover:bg-white/10 transition-colors"
+                            className="flex items-center gap-3 p-2 rounded-lg border border-white/5 bg-white/5 hover:bg-white/10 transition-colors"
                           >
                             {/* Rank */}
                             <div className={`
-                              flex items-center justify-center w-8 h-8 rounded font-mono font-bold text-sm
+                              flex items-center justify-center w-6 h-6 rounded font-mono font-bold text-xs shrink-0
                               ${isTopThree ? 'bg-[#D4AF37] text-black' : 'text-white/30 bg-white/5'}
                             `}>
                               {index + 1}
@@ -149,22 +152,22 @@ export function Header({ auctionActive }: HeaderProps) {
 
                             {/* Info */}
                             <div className="flex-1 min-w-0">
-                              <h3 className="font-bold text-sm truncate text-white/90">
+                              <h3 className="font-bold text-xs sm:text-sm truncate text-white/90">
                                 {student.name}
                               </h3>
-                              <div className="flex items-center gap-2 mt-1">
-                                <span className={`text-[10px] px-1.5 py-0.5 rounded uppercase font-bold tracking-wider ${getVanguardColorClass(vanguard.color)}`}>
+                              <div className="flex items-center gap-2 mt-0.5">
+                                <span className={`text-[9px] px-1.5 py-px rounded uppercase font-bold tracking-wider ${getVanguardColorClass(vanguard.color)}`}>
                                   {vanguard.name}
                                 </span>
                               </div>
                             </div>
 
                             {/* Price */}
-                            <div className="text-right">
-                              <p className="text-lg font-black font-mono leading-none" style={{ color: GOLD }}>
+                            <div className="text-right shrink-0">
+                              <p className="text-base sm:text-lg font-black font-mono leading-none" style={{ color: GOLD }}>
                                 {student.soldPrice?.toFixed(2)}
                               </p>
-                              <p className="text-[10px] text-white/40 uppercase tracking-wider">CR</p>
+                              <p className="text-[9px] text-white/40 uppercase tracking-wider">CR</p>
                             </div>
                           </div>
                         );

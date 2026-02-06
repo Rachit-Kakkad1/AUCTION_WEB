@@ -20,7 +20,7 @@ import STUDENT_ROSTER from '@/data/students_data.json';
 // ============================================================
 // STORAGE KEY - Version for future migrations
 // ============================================================
-const STORAGE_KEY = 'auction_state_v7';
+const STORAGE_KEY = 'auction_state_v8';
 const CHANNEL_NAME = 'auction_sync';
 
 // ============================================================
@@ -59,6 +59,20 @@ export interface PersistedState {
     activeAnnouncement: string | null;
     /** For SFX functionality */
     sfxTrigger: { id: string; timestamp: number } | null;
+    /** Auction History Log */
+    history: {
+        id: string;
+        type: 'SALE' | 'UNSOLD' | 'SKIP' | 'UNDO';
+        message: string;
+        timestamp: string;
+        details?: any;
+    }[];
+    /** Global Audio Settings */
+    audioSettings: {
+        bgmVolume: number;
+        sfxVolume: number;
+        voiceVolume: number;
+    };
 }
 
 // ============================================================
@@ -184,6 +198,12 @@ function createInitialState(seed: string): PersistedState {
         globalFreeze: false,
         activeAnnouncement: null,
         sfxTrigger: null,
+        history: [],
+        audioSettings: {
+            bgmVolume: 0.5,
+            sfxVolume: 1.0,
+            voiceVolume: 1.0,
+        },
     };
 }
 
@@ -253,6 +273,23 @@ export function subscribe(callback: () => void): () => void {
 // MUTATIONS - All atomic and broadcast
 // ============================================================
 
+function logHistory(
+    state: PersistedState,
+    type: 'SALE' | 'UNSOLD' | 'SKIP' | 'UNDO',
+    message: string,
+    details?: any
+) {
+    const entry = {
+        id: `log-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`,
+        type,
+        message,
+        timestamp: new Date().toISOString(),
+        details,
+    };
+    // Keep last 50 events
+    state.history = [entry, ...(state.history || [])].slice(0, 50);
+}
+
 /**
  * Confirm a sale. Removes student from queue, marks as sold, updates vanguard.
  * Resets timer for next student.
@@ -298,6 +335,13 @@ export function confirmSale(studentId: string, vanguardId: string, price: number
     // Record for UNDO
     state.lastAction = { type: 'sale', studentId, vanguardId, price };
 
+    // Log History
+    logHistory(state, 'SALE', `${student.name} sold to ${vanguard.name} for ${price}cr`, {
+        studentId,
+        vanguardId,
+        price
+    });
+
     // Remove from queue
     state.queue = state.queue.slice(1);
 
@@ -339,6 +383,9 @@ export function markAsUnsold(studentId: string): PersistedState {
         soldTo: undefined,
         soldPrice: undefined,
     };
+
+    // Log History
+    logHistory(state, 'UNSOLD', `${student.name} marked as UNSOLD`, { studentId });
 
     // Remove from queue
     state.queue = state.queue.slice(1);
@@ -398,6 +445,9 @@ export function skipCurrentStudent(): PersistedState {
     const [current, ...rest] = state.queue;
     state.queue = [...rest, current];
 
+    // Log History
+    logHistory(state, 'SKIP', `Skipped ${state.students[current].name}`, { studentId: current });
+
     // Reset timer
     state.timer = {
         startedAt: null,
@@ -427,6 +477,9 @@ export function sendToEndOfQueue(studentId: string): PersistedState {
         ...state.queue.slice(index + 1),
         studentId,
     ];
+
+    // Log History
+    logHistory(state, 'SKIP', `Sent ${state.students[studentId].name} to end of queue`, { studentId });
 
     saveState(state);
     return state;
@@ -466,6 +519,9 @@ export function undoSale(studentId: string): PersistedState {
 
     // Add to end of queue
     state.queue = [...state.queue, studentId];
+
+    // Log History
+    logHistory(state, 'UNDO', `Undid sale of ${student.name}`, { studentId });
 
     saveState(state);
     return state;
@@ -545,7 +601,6 @@ export function startTimer(): PersistedState {
     // If resuming from pause
     if (state.timer.pausedRemaining !== null) {
         const now = new Date();
-        // Calculate what the start time would have been to have this remaining time
         const effectiveStart = new Date(now.getTime() - (state.timer.duration - state.timer.pausedRemaining) * 1000);
         state.timer = {
             startedAt: effectiveStart.toISOString(),
@@ -556,7 +611,7 @@ export function startTimer(): PersistedState {
         // Fresh start
         state.timer = {
             startedAt: new Date().toISOString(),
-            duration: TIMER_DURATION,
+            duration: state.timer.duration,
             pausedRemaining: null,
         };
     }
@@ -652,6 +707,26 @@ export function shuffleRemainingQueue(): PersistedState {
     return state;
 }
 
+export function forceReshuffle(): PersistedState {
+    const state = loadState();
+    if (!state) throw new Error('No auction state');
+
+    if (state.queue.length <= 1) return state;
+
+    const current = state.queue[0];
+    const remaining = state.queue.slice(1);
+
+    // Simple Fisher-Yates for guaranteed randomness without seed complexity
+    for (let i = remaining.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [remaining[i], remaining[j]] = [remaining[j], remaining[i]];
+    }
+
+    state.queue = [current, ...remaining];
+    saveState(state);
+    return state;
+}
+
 // ============================================================
 // GOD-TIER FEATURES
 // ============================================================
@@ -718,6 +793,70 @@ export function triggerSfx(sfxId: string): PersistedState {
     const state = loadState();
     if (!state) throw new Error('No state');
     state.sfxTrigger = { id: sfxId, timestamp: Date.now() };
+    saveState(state);
+    return state;
+}
+
+export function updateAudioSettings(settings: Partial<{ bgmVolume: number; sfxVolume: number; voiceVolume: number }>): PersistedState {
+    const state = loadState();
+    if (!state) throw new Error('No state');
+
+    state.audioSettings = {
+        ...state.audioSettings,
+        ...settings
+    };
+
+    saveState(state);
+    return state;
+}
+
+/**
+ * Restore state from backup/import
+ */
+export function restoreState(newState: PersistedState): PersistedState {
+    // Basic validation
+    if (!newState || !newState.students || !newState.queue) {
+        throw new Error('Invalid state object');
+    }
+
+    // Force version match if needed, or handle migration here
+    // For now, just accept it
+
+    saveState(newState);
+    return newState;
+}
+
+/**
+ * Jump to a specific student in the queue.
+ * Moves the target student to queue[0].
+ * Only works for students already in the queue (available).
+ */
+export function jumpToStudent(studentId: string): PersistedState {
+    const state = loadState();
+    if (!state) throw new Error('No auction state');
+
+    const index = state.queue.indexOf(studentId);
+    if (index === -1) throw new Error('Student not in queue (might be sold/unsold)');
+
+    // If already first, no-op
+    if (index === 0) return state;
+
+    // Remove from current position
+    const newQueue = [
+        studentId,
+        ...state.queue.slice(0, index),
+        ...state.queue.slice(index + 1)
+    ];
+
+    state.queue = newQueue;
+
+    // Reset timer for the new student
+    state.timer = {
+        startedAt: null,
+        duration: TIMER_DURATION,
+        pausedRemaining: null,
+    };
+
     saveState(state);
     return state;
 }

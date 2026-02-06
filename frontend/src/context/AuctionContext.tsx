@@ -1,8 +1,10 @@
 import React, { createContext, useContext, useState, useCallback, useMemo, useEffect, useRef } from 'react';
 import { Student, Vanguard } from '@/types/auction';
+import { toast } from 'sonner';
 import * as store from '@/lib/auctionStore';
 
 interface AuctionContextType {
+    isConnected: boolean;
     students: Student[];
     vanguards: Vanguard[];
     currentStudent: Student | null;
@@ -22,13 +24,28 @@ interface AuctionContextType {
     resetTimer: () => void;
     sendToEndOfQueue: (studentId: string) => void;
     shuffleRemainingQueue: () => void;
+    forceReshuffle: () => void;
     undoLastSale: () => void;
     setGlobalFreeze: (frozen: boolean) => void;
     broadcastAnnouncement: (text: string | null) => void;
     triggerSfx: (sfxId: string) => void;
+    jumpToStudent: (studentId: string) => void;
     globalFreeze: boolean;
     activeAnnouncement: string | null;
     sfxTrigger: { id: string; timestamp: number } | null;
+    history: {
+        id: string;
+        type: 'SALE' | 'UNSOLD' | 'SKIP' | 'UNDO';
+        message: string;
+        timestamp: string;
+    }[];
+    audioSettings: {
+        bgmVolume: number;
+        sfxVolume: number;
+        voiceVolume: number;
+    };
+    setAudioSettings: (settings: Partial<{ bgmVolume: number; sfxVolume: number; voiceVolume: number }>) => void;
+    importState: (newState: any) => void;
 }
 
 const AuctionContext = createContext<AuctionContextType | undefined>(undefined);
@@ -81,7 +98,6 @@ export const AuctionProvider: React.FC<{ children: React.ReactNode }> = ({ child
     const isTimerRunning = useMemo(() =>
         state.timer.startedAt !== null && state.timer.pausedRemaining === null,
         [state.timer]
-        [state.timer]
     );
     const globalFreeze = state.globalFreeze;
     const activeAnnouncement = state.activeAnnouncement;
@@ -93,6 +109,7 @@ export const AuctionProvider: React.FC<{ children: React.ReactNode }> = ({ child
         try {
             const newState = store.confirmSale(studentId, vanguardId, price);
             setState(newState);
+            // toast.success(`Sold to ${newState.vanguards[vanguardId].name}`);
 
             // LIVE EVENT SYNC: Fire-and-forget backend update
             const soldStudent = newState.students[studentId];
@@ -112,6 +129,7 @@ export const AuctionProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
         } catch (err) {
             console.error('Sale failed:', err);
+            toast.error('Sale Failed: ' + (err as Error).message);
         }
     }, []);
 
@@ -209,8 +227,19 @@ export const AuctionProvider: React.FC<{ children: React.ReactNode }> = ({ child
         try {
             const newState = store.shuffleRemainingQueue();
             setState(newState);
+            toast.success('Queue Shesuffled (Seeded)');
         } catch (err) {
-            console.error('Shuffle failed:', err);
+            toast.error('Shuffle failed');
+        }
+    }, []);
+
+    const forceReshuffle = useCallback(() => {
+        try {
+            const newState = store.forceReshuffle();
+            setState(newState);
+            toast.success('Queue Force Shuffled (Random)');
+        } catch (err) {
+            toast.error('Force Shuffle failed');
         }
     }, []);
 
@@ -250,7 +279,41 @@ export const AuctionProvider: React.FC<{ children: React.ReactNode }> = ({ child
         }
     }, []);
 
+    const jumpToStudent = useCallback((studentId: string) => {
+        try {
+            const newState = store.jumpToStudent(studentId);
+            setState(newState);
+        } catch (err) {
+            console.error('Jump to student failed:', err);
+        }
+    }, []);
+
+    const setAudioSettings = useCallback((settings: Partial<{ bgmVolume: number; sfxVolume: number; voiceVolume: number }>) => {
+        try {
+            const newState = store.updateAudioSettings(settings);
+            setState(newState);
+        } catch (err) {
+            console.error('Update audio settings failed:', err);
+        }
+    }, []);
+
+    const importState = useCallback((newState: any) => {
+        try {
+            // Validate via store (basic check)
+            const validated = store.restoreState(newState);
+            setState(validated);
+        } catch (err) {
+            console.error('Import failed:', err);
+            throw err;
+        }
+    }, []);
+
+    // ━━━ REAL-TIME SYNC ━━━
+    // Connects to the local Socket.io server (if running)
+    const { isConnected } = useSocketSync(state, importState);
+
     const value = {
+        isConnected, // Expose connection status
         students,
         vanguards,
         currentStudent,
@@ -270,13 +333,19 @@ export const AuctionProvider: React.FC<{ children: React.ReactNode }> = ({ child
         resetTimer,
         sendToEndOfQueue,
         shuffleRemainingQueue,
+        forceReshuffle,
         undoLastSale,
         setGlobalFreeze,
         broadcastAnnouncement,
         triggerSfx,
+        jumpToStudent,
         globalFreeze,
         activeAnnouncement,
         sfxTrigger,
+        history: state.history,
+        audioSettings: state.audioSettings || { bgmVolume: 0.5, sfxVolume: 1.0, voiceVolume: 1.0 }, // Fallback for migration
+        setAudioSettings,
+        importState,
     };
 
     return <AuctionContext.Provider value={value}>{children}</AuctionContext.Provider>;

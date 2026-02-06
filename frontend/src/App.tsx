@@ -4,7 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import { AuctionProvider } from "./context/AuctionContext";
+import { AuctionProvider } from "@/context/AuctionContext";
 import Index from "./pages/Index";
 import Admin from "./pages/Admin";
 import Landing from "./pages/Landing";
@@ -23,7 +23,7 @@ const AnimatedRoutes = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/auction" element={<Index />} />
         <Route path="/admin" element={<Admin />} />
-        <Route path="/controller" element={<Controller />} />
+        <Route path="/live-ops" element={<Controller />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>

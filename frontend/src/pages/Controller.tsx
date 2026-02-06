@@ -25,7 +25,6 @@ import {
     Wifi,
     WifiOff,
     ChevronRight,
-    ChevronRight,
     Undo2,
     Mic2,
     Volume2,
@@ -36,6 +35,11 @@ import {
 import { Link } from 'react-router-dom';
 import { toast } from 'sonner';
 import { Vanguard } from '@/types/auction';
+import { StudentSearch } from '@/components/StudentSearch';
+import { ActionLog } from '@/components/controller/ActionLog';
+import { KeyboardManager } from '@/components/controller/KeyboardManager';
+import { AudioMixer } from '@/components/controller/AudioMixer';
+import { DataManager } from '@/components/controller/DataManager';
 
 /**
  * CONTROLLER PAGE - Operational Cockpit (PASSWORD PROTECTED)
@@ -73,12 +77,17 @@ const Controller = () => {
         pauseTimer,
         resetTimer,
         shuffleRemainingQueue,
+        forceReshuffle,
         undoLastSale,
         setGlobalFreeze,
         broadcastAnnouncement,
         triggerSfx,
         globalFreeze,
         activeAnnouncement,
+        history,
+        handleUnsold,
+        setAudioSettings,
+        importState, // Helper for data
     } = useAuction();
 
     // Announcement state
@@ -240,6 +249,15 @@ const Controller = () => {
                             </div>
                         )}
 
+                        <StudentSearch
+                            trigger={
+                                <Button variant="outline" size="sm" className="gap-2 bg-secondary/50 border-white/10">
+                                    <Hash className="w-3.5 h-3.5 text-muted-foreground" />
+                                    <span className="hidden sm:inline">Jump to ID...</span>
+                                </Button>
+                            }
+                        />
+
                         <Link to="/auction">
                             <Button variant="outline" size="sm">
                                 Main Screen
@@ -248,6 +266,21 @@ const Controller = () => {
                     </div>
                 </div>
             </header>
+
+            <KeyboardManager
+                onToggleTimer={() => isTimerRunning ? pauseTimer() : startTimer()}
+                onResetTimer={resetTimer}
+                onSell={() => toast.info('Shortcuts: Select a Vanguard to sell')}
+                onUnsold={() => {
+                    if (currentStudent) {
+                        if (confirm(`Mark ${currentStudent.name} as UNSOLD?`)) {
+                            handleUnsold(currentStudent.id);
+                            toast.warning(`${currentStudent.name} marked UNSOLD`);
+                        }
+                    }
+                }}
+                disabled={!isAuthenticated}
+            />
 
             {/* Soft Alerts */}
             {
@@ -368,27 +401,38 @@ const Controller = () => {
 
                 {/* SFX Panel */}
                 <div className="glass-card rounded-xl p-4">
-                    <div className="flex items-center gap-2 mb-3 text-muted-foreground">
+                    <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-3 flex items-center gap-2">
                         <Volume2 className="w-4 h-4" />
-                        <span className="text-xs font-bold uppercase">Soundboard</span>
-                    </div>
+                        Sound Board
+                    </h3>
                     <div className="grid grid-cols-3 gap-2">
-                        {SFX_LIST.map(sfx => (
+                        {SFX_LIST.map((sfx) => (
                             <Button
                                 key={sfx.id}
-                                variant="secondary"
-                                size="sm"
+                                variant="outline"
                                 onClick={() => {
                                     triggerSfx(sfx.id);
-                                    toast.success(`Played ${sfx.label}`);
+                                    toast.success(`Playing: ${sfx.label}`);
                                 }}
-                                className="h-10 text-xs font-bold"
+                                className="h-16 flex-col gap-1 border-white/10 hover:bg-white/5"
                             >
-                                {sfx.label}
+                                <sfx.icon className="w-5 h-5 opacity-70" />
+                                <span className="text-[10px] font-medium">{sfx.label}</span>
                             </Button>
                         ))}
                     </div>
                 </div>
+
+                {/* Audio Mixer */}
+                <AudioMixer onVolumeChange={(channel, volume) => {
+                    setAudioSettings({ [`${channel}Volume`]: volume });
+                }} />
+
+                {/* Data Manager */}
+                <DataManager onImport={importState} />
+
+                {/* Action Log */}
+                <ActionLog history={history} />
 
                 {/* Current Student Card */}
                 <div className="glass-card-elevated rounded-2xl p-5 border-l-4 border-primary">
@@ -464,6 +508,14 @@ const Controller = () => {
                                 <Users className="w-5 h-5" />
                                 Shuffle Remaining Queue
                             </Button>
+                            <Button
+                                onClick={forceReshuffle}
+                                variant="outline"
+                                className="w-full h-12 text-sm font-bold gap-2 rounded-xl mt-2 border-dashed border-red-500/20 hover:bg-red-500/5 text-red-500"
+                            >
+                                <Users className="w-5 h-5" />
+                                Force Hard Shuffle
+                            </Button>
                         </>
                     ) : (
                         <p className="text-muted-foreground italic text-center py-3 text-sm">
@@ -475,6 +527,7 @@ const Controller = () => {
                 {/* Queue Preview (READ-ONLY) */}
                 {
                     queuePreview.length > 0 && (
+                        // Fixed
                         <div className="glass-card rounded-xl p-4">
                             <div className="flex items-center justify-between mb-3">
                                 <div className="flex items-center gap-2">
@@ -491,17 +544,35 @@ const Controller = () => {
                                 {queuePreview.map((student, idx) => (
                                     <div
                                         key={student.id}
-                                        className="flex items-center gap-3 px-3 py-2 rounded-lg bg-secondary/30"
+                                        className="flex items-center gap-3 px-3 py-2 rounded-lg bg-secondary/30 group hover:bg-secondary/50 transition-colors"
                                     >
                                         <span className="w-5 h-5 rounded-full bg-secondary flex items-center justify-center text-[10px] font-bold text-muted-foreground">
                                             {idx + 2}
                                         </span>
-                                        <span className="text-sm font-medium text-foreground truncate flex-1">
-                                            {student.name}
-                                        </span>
-                                        <span className="font-mono text-[10px] text-muted-foreground">
-                                            {student.grNumber}
-                                        </span>
+                                        <div className="flex-1 min-w-0">
+                                            <span className="text-sm font-medium text-foreground truncate block">
+                                                {student.name}
+                                            </span>
+                                            <span className="font-mono text-[10px] text-muted-foreground block">
+                                                {student.grNumber}
+                                            </span>
+                                        </div>
+
+                                        {/* Individual Action */}
+                                        <Button
+                                            size="sm"
+                                            variant="ghost"
+                                            onClick={() => {
+                                                if (confirm(`Send ${student.name} to the end of the queue?`)) {
+                                                    sendToEndOfQueue(student.id);
+                                                    toast.info(`${student.name} moved to end`);
+                                                }
+                                            }}
+                                            className="h-8 w-8 p-0 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white/10 text-muted-foreground hover:text-foreground"
+                                            title="Send to End of Queue"
+                                        >
+                                            <FastForward className="w-4 h-4" />
+                                        </Button>
                                     </div>
                                 ))}
                             </div>
