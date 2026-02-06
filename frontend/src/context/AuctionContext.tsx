@@ -2,10 +2,10 @@ import React, { createContext, useContext, useState, useCallback, useMemo, useEf
 import { Student, Vanguard } from '@/types/auction';
 import { toast } from 'sonner';
 import * as store from '@/lib/auctionStore';
-import { useSocketSync } from '@/hooks/useSocketSync';
+
 
 interface AuctionContextType {
-    isConnected: boolean;
+    // isConnected: boolean; // Removed socket connection status
     students: Student[];
     vanguards: Vanguard[];
     currentStudent: Student | null;
@@ -112,11 +112,12 @@ export const AuctionProvider: React.FC<{ children: React.ReactNode }> = ({ child
             setState(newState);
             // toast.success(`Sold to ${newState.vanguards[vanguardId].name}`);
 
-            // LIVE EVENT SYNC: Fire-and-forget backend update
+            // LIVE EVENT SYNC: Send to Backend (Local or Cloud)
             const soldStudent = newState.students[studentId];
             const soldVanguard = newState.vanguards[soldStudent.soldTo];
+            const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
-            fetch("https://auction-web-qtks.onrender.com/api/sale", {
+            fetch(`${API_URL}/api/sale`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -125,9 +126,13 @@ export const AuctionProvider: React.FC<{ children: React.ReactNode }> = ({ child
                     price,
                     vanguard: soldVanguard.name,
                 }),
-            }).catch(() => console.warn("Background sync failed"));
-
-
+            }).then(res => {
+                if (!res.ok) throw new Error('Backend sync failed');
+                // toast.success("Sale synced to database");
+            }).catch(err => {
+                console.warn("Background sync failed:", err);
+                // Optional: toast.error("Offline Mode: Sync failed");
+            });
         } catch (err) {
             console.error('Sale failed:', err);
             toast.error('Sale Failed: ' + (err as Error).message);
@@ -309,12 +314,11 @@ export const AuctionProvider: React.FC<{ children: React.ReactNode }> = ({ child
         }
     }, []);
 
-    // ━━━ REAL-TIME SYNC ━━━
-    // Connects to the local Socket.io server (if running)
-    const { isConnected } = useSocketSync(state, importState);
+    // ━━━ REAL-TIME SYNC REMOVED ━━━
+    // const { isConnected } = useSocketSync(state, importState);
 
     const value = {
-        isConnected, // Expose connection status
+        isConnected: true, // Always 'connected' in local-only mode
         students,
         vanguards,
         currentStudent,

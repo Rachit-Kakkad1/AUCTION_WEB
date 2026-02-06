@@ -2,14 +2,29 @@ const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
 const cors = require('cors');
+const mongoose = require('mongoose');
+require('dotenv').config();
+
+const AuctionState = require('./models/AuctionState');
+const { appendToSheet } = require('./utils/googleSheets');
 
 const app = express();
 app.use(cors());
+app.use(express.json()); // Enable JSON body parsing
+
+// ━━━ MONGODB CONNECTION ━━━
+if (process.env.MONGO_URI) {
+    mongoose.connect(process.env.MONGO_URI)
+        .then(() => console.log('✅ MongoDB Connected'))
+        .catch(err => console.error('❌ MongoDB Connection Error:', err));
+} else {
+    console.warn('⚠️ No MONGO_URI found in .env');
+}
 
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: "*", // Allow all connections (laptop + mobile)
+        origin: "*",
         methods: ["GET", "POST"]
     }
 });
@@ -17,23 +32,55 @@ const io = new Server(server, {
 // In-memory state store
 let activeState = null;
 
+// ━━━ REST API ━━━
+
+// Endpoint to Record Sale (Used by Frontend)
+app.post('/api/sale', async (req, res) => {
+    try {
+        const { studentId, name, price, vanguard } = req.body;
+        console.log(`💰 SALE: ${name} -> ${vanguard} (${price}cr)`);
+
+        // 1. Save to MongoDB
+        const newRecord = new AuctionState({
+            type: 'SALE',
+            studentId,
+            studentName: name,
+            vanguard,
+            price,
+            details: req.body
+        });
+        await newRecord.save();
+
+        // 2. Append to Google Sheet
+        // Format: [Date, Type, Name, Vanguard, Price]
+        const row = [
+            new Date().toISOString(),
+            'SALE',
+            name,
+            vanguard,
+            price
+        ];
+        await appendToSheet(row);
+
+        res.json({ success: true, message: 'Sale Recorded' });
+    } catch (err) {
+        console.error('API Error:', err);
+        res.status(500).json({ success: false, error: err.message });
+    }
+});
+
 io.on('connection', (socket) => {
     console.log(`User Connected: ${socket.id}`);
 
-    // When client joins, send them the latest state if we have one
     if (activeState) {
         socket.emit('SYNC_STATE', activeState);
     }
 
-    // Client pushes a state update
     socket.on('UPDATE_STATE', (newState) => {
-        // console.log('State updated by', socket.id);
         activeState = newState;
-        // Broadcast to EVERYONE ELSE
         socket.broadcast.emit('SYNC_STATE', newState);
     });
 
-    // Client specifically requests latest state
     socket.on('REQUEST_SYNC', () => {
         if (activeState) {
             socket.emit('SYNC_STATE', activeState);
@@ -47,6 +94,5 @@ io.on('connection', (socket) => {
 
 const PORT = process.env.PORT || 3001;
 server.listen(PORT, '0.0.0.0', () => {
-    console.log(`Socket Server running on port ${PORT}`);
-    console.log(`Ensure frontend connects to this server.`);
+    console.log(`🚀 Server running on port ${PORT}`);
 });

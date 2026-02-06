@@ -367,8 +367,10 @@ export function markAsUnsold(studentId: string): PersistedState {
     if (!state) throw new Error('No auction state');
 
     // Validate: student must be queue[0]
+    // Validate: student must be queue[0]
     if (state.queue[0] !== studentId) {
-        throw new Error('Can only mark current student (queue[0]) as unsold');
+        console.warn('Handling stale unsold request - ignoring');
+        return state;
     }
 
     const student = state.students[studentId];
