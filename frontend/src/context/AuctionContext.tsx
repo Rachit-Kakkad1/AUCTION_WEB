@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useCallback, useMemo, useEf
 import { Student, Vanguard } from '@/types/auction';
 import { toast } from 'sonner';
 import * as store from '@/lib/auctionStore';
+import { useSocketSync } from '@/hooks/useSocketSync';
 
 interface AuctionContextType {
     isConnected: boolean;

@@ -6,6 +6,12 @@ import { toast } from 'sonner';
 // Auto-detect server URL based on where the frontend is served from
 // This allows 192.168.x.x access to work automatically
 const getServerUrl = () => {
+    // 1. If Cloud URL is set in .env, use it (for mobile data usage)
+    if (import.meta.env.VITE_API_URL) {
+        return import.meta.env.VITE_API_URL;
+    }
+
+    // 2. Fallback to Local Network discovery (for WiFi hotspot usage)
     const hostname = window.location.hostname;
     return `http://${hostname}:3001`;
 };
