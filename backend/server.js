@@ -3,7 +3,8 @@ const http = require('http');
 const { Server } = require('socket.io');
 const cors = require('cors');
 const mongoose = require('mongoose');
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '.env') });
 
 const AuctionState = require('./models/AuctionState');
 const { appendToSheet } = require('./utils/googleSheets');
