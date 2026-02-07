@@ -19,19 +19,16 @@ async function appendToSheet(values) {
         return;
     }
 
-    try {
-        await sheets.spreadsheets.values.append({
-            spreadsheetId: SPREADSHEET_ID,
-            range: 'Sheet1!A:E', // Adjust Sheet name if needed
-            valueInputOption: 'USER_ENTERED',
-            resource: {
-                values: [values],
-            },
-        });
-        console.log('Added to Google Sheet');
-    } catch (error) {
-        console.error('Google Sheets Error:', error.message);
-    }
+    // Allow error to propagate so server.js can catch it and send to frontend
+    await sheets.spreadsheets.values.append({
+        spreadsheetId: SPREADSHEET_ID,
+        range: 'Sheet1!A:E',
+        valueInputOption: 'USER_ENTERED',
+        resource: {
+            values: [values],
+        },
+    });
+    console.log('Added to Google Sheet');
 }
 
 module.exports = { appendToSheet };

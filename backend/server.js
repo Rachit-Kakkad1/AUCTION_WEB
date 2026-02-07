@@ -69,17 +69,25 @@ app.post('/api/sale', async (req, res) => {
         await newRecord.save();
 
         // 2. Append to Google Sheet
-        // Format: [Date, Type, Name, Vanguard, Price]
-        const row = [
-            new Date().toISOString(),
-            'SALE',
-            name,
-            vanguard,
-            price
-        ];
-        await appendToSheet(row);
-
-        res.json({ success: true, message: 'Sale Recorded' });
+        try {
+            const row = [
+                new Date().toISOString(),
+                'SALE',
+                name,
+                vanguard,
+                price
+            ];
+            await appendToSheet(row);
+            res.json({ success: true, message: 'Sale Recorded & Added to Sheet' });
+        } catch (sheetErr) {
+            console.error('Google Sheets Error:', sheetErr);
+            // Return success: true (MongoDB saved) but with a warning
+            res.json({
+                success: true,
+                message: 'Sale Saved to DB, but Google Sheets Failed',
+                sheetError: sheetErr.message
+            });
+        }
     } catch (err) {
         console.error('API Error:', err);
         res.status(500).json({ success: false, error: err.message });
