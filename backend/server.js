@@ -36,6 +36,22 @@ let activeState = null;
 // ━━━ REST API ━━━
 
 // Endpoint to Record Sale (Used by Frontend)
+app.get('/', (req, res) => {
+    res.send('Auction Server is Running');
+});
+
+app.get('/api/status', (req, res) => {
+    res.json({
+        status: 'ok',
+        mongo: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected',
+        googleSheets: {
+            hasSheetId: !!process.env.GOOGLE_SHEET_ID,
+            hasEmail: !!process.env.GOOGLE_CLIENT_EMAIL,
+            hasKey: !!process.env.GOOGLE_PRIVATE_KEY
+        }
+    });
+});
+
 app.post('/api/sale', async (req, res) => {
     try {
         const { studentId, name, price, vanguard } = req.body;
