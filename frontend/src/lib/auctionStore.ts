@@ -211,28 +211,80 @@ function createInitialState(seed: string): PersistedState {
 // STORAGE OPERATIONS
 // ============================================================
 
+// ============================================================
+// STORAGE OPERATIONS
+// ============================================================
+
 export function loadState(): PersistedState | null {
     try {
         const raw = localStorage.getItem(STORAGE_KEY);
         if (!raw) return null;
         const parsed = JSON.parse(raw) as PersistedState;
-        if (parsed.version !== 1) return null;
+
+        // Sanity Check: Version
+        if (parsed.version !== 1) {
+            console.error('State version mismatch', parsed.version);
+            return null;
+        }
+
+        // SANITIZER: Ensure no sold/unsold students are in queue
+        // This fixes the "zombie player" issue if state gets corrupted
+        const validQueue = parsed.queue.filter(id => {
+            const s = parsed.students[id];
+            return s && s.status === 'available';
+        });
+
+        if (validQueue.length !== parsed.queue.length) {
+            console.warn(`Sanitized queue: Removed ${parsed.queue.length - validQueue.length} invalid items`);
+            parsed.queue = validQueue;
+            // We don't save here to avoid side effects during load, but subsequent saves will be clean
+        }
+
         return parsed;
-    } catch {
-        return null;
+    } catch (err) {
+        console.error('Failed to load state:', err);
+        return null; // This triggers a reset, which is bad. We should try backup.
     }
 }
 
 export function saveState(state: PersistedState): void {
-    state.updatedAt = new Date().toISOString();
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-    broadcastUpdate();
+    try {
+        state.updatedAt = new Date().toISOString();
+        const serialized = JSON.stringify(state);
+        localStorage.setItem(STORAGE_KEY, serialized);
+
+        // Create a backup every 5 minutes or on critical actions
+        // For now, let's just keep a "last-known-good" backup
+        localStorage.setItem(`${STORAGE_KEY}_backup`, serialized);
+
+        broadcastUpdate();
+    } catch (err) {
+        console.error('Failed to save state:', err);
+    }
 }
 
 export function initializeOrLoad(): PersistedState {
+    // 1. Try loading primary state
     const existing = loadState();
     if (existing) return existing;
 
+    // 2. Try loading backup if primary failed
+    try {
+        const backupRaw = localStorage.getItem(`${STORAGE_KEY}_backup`);
+        if (backupRaw) {
+            const backup = JSON.parse(backupRaw) as PersistedState;
+            if (backup.version === 1) {
+                console.warn('Primary state missing/corrupt. Restored from backup.');
+                saveState(backup); // Restore backup to primary
+                return backup;
+            }
+        }
+    } catch (err) {
+        console.error('Failed to load backup:', err);
+    }
+
+    // 3. If all else fails, create fresh state (Last Resort)
+    console.warn('Initializing FRESH auction state (Reset)');
     const seed = generateSeed();
     const initial = createInitialState(seed);
     saveState(initial);

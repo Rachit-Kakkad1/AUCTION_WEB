@@ -70,7 +70,7 @@ export default function Landing() {
 
     const handleStart = () => {
         setIsExiting(true);
-        setTimeout(() => navigate('/auction'), 1200);
+        setTimeout(() => navigate('/select-auction'), 1200);
     };
 
     return (

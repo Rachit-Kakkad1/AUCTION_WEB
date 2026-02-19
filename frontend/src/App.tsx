@@ -8,6 +8,7 @@ import { AuctionProvider } from "@/context/AuctionContext";
 import Index from "./pages/Index";
 import Admin from "./pages/Admin";
 import Landing from "./pages/Landing";
+import AuctionSelection from "./pages/AuctionSelection";
 import Login from "./pages/Login";
 import Controller from "./pages/Controller";
 import NotFound from "./pages/NotFound";
@@ -20,6 +21,7 @@ const AnimatedRoutes = () => {
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Landing />} />
+        <Route path="/select-auction" element={<AuctionSelection />} />
         <Route path="/login" element={<Login />} />
         <Route path="/auction" element={<Index />} />
         <Route path="/admin" element={<Admin />} />
